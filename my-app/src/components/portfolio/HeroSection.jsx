@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Download, Mail } from "lucide-react";
+import FuzzyText from "./FuzzyText";
+import DecryptedText from "./DecryptedText";
 
 export default function HeroSection() {
   const scrollToAbout = () => {
@@ -8,26 +10,50 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative pt-20">
-      <div className="max-w-7xl mx-auto px-6 py-20 text-center">
+    <section id="hero" className="min-h-screen flex items-center justify-center relative bg-white">
+      <div className="max-w-7xl mx-auto px-6 py-32 text-center">
         <div className="animate-fade-in-up">
-          {/* Profile Image Placeholder */}
-          <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-xl">
-            MW
+          {/* Profile Image */}
+          <div className="w-40 h-40 mx-auto mb-12 rounded-full overflow-hidden shadow-2xl border-4 border-slate-100">
+            <img 
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68cd5005490ad54dbd3afe4a/7442acfd2_IMG_3276.jpg" 
+              alt="Michael Whiteman"
+              className="w-full h-full object-cover"
+            />
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight animated-gradient-text">
-            Michael Whiteman
-          </h1>
+          <div className="mb-8">
+            <FuzzyText 
+              fontSize="clamp(3rem, 12vw, 8rem)"
+              fontWeight={900}
+              color="var(--text-dark)"
+              baseIntensity={0.15}
+              hoverIntensity={0.6}
+            >
+              Michael Whiteman
+            </FuzzyText>
+          </div>
           
-          <h2 className="text-xl md:text-2xl text-[var(--text-muted)] mb-8 font-light">
-            Computer Engineering Student & Software Developer
-          </h2>
+          <div className="mb-8">
+            <DecryptedText
+              text="Computer Engineering Student & Software Developer"
+              className="text-xl md:text-2xl font-light text-[var(--text-muted)]"
+              speed={30}
+              maxIterations={15}
+              animateOn="view"
+            />
+          </div>
           
-          <p className="text-lg text-slate-500 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Passionate about creating innovative solutions through code. Currently pursuing Computer Engineering 
-            at University of Waterloo with hands-on experience in software development, game design, and hardware projects.
-          </p>
+          <div className="mb-12 max-w-4xl mx-auto">
+            <DecryptedText
+              text="Passionate about creating innovative solutions through code. Currently pursuing Computer Engineering at University of Waterloo with hands-on experience in software development, game design, and hardware projects."
+              className="text-lg text-slate-600 leading-relaxed"
+              speed={20}
+              maxIterations={8}
+              sequential={false}
+              animateOn="view"
+            />
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
