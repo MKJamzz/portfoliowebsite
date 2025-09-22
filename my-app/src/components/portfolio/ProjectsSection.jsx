@@ -159,7 +159,7 @@ export default function ProjectsSection({ onProjectClick }) {
           <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6 text-outline">Featured Projects</h2>
           <div className="w-20 h-1 bg-[var(--primary)] mx-auto mb-8"></div>
           <DecryptedText
-            text="A showcase of my technical projects ranging from hardware engineering to game development and data processing."
+            text="A showcase of my technical projects ranging from embedded systems to game development and data processing."
             className="text-xl text-[#d1b2eb] text-outline"
             speed={50}
             maxIterations={10}

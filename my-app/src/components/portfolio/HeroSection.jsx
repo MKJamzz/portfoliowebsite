@@ -36,31 +36,22 @@ export default function HeroSection() {
           </div>
 
           {/* Name */}
-          <div className="mb-8 w-full overflow-visible">
-            <FuzzyText
-              className="font-tech"
-              fontSize="clamp(2.5rem, 8vw, 6rem)"
-              fontWeight={900}
-              color="#c2a1ff"
-              baseIntensity={0.15}
-              hoverIntensity={0.6}
-            >
+          <div className="mb-2 w-full text-center">
+            <h1 className="font-tech text-[clamp(2.5rem,8vw,6rem)] font-extrabold text-[#c2a1ff] text-outline">
               Michael Whiteman
-            </FuzzyText>
+            </h1>
           </div>
 
+
+
           {/* Subtitle */}
-          <div className="mb-6 flex justify-center">
-            <FuzzyText
-              fontSize="clamp(1rem, 3vw, 2rem)"   // much smaller
-              fontWeight={700}                    // still bold but not overwhelming
-              color="#c2a1ff"
-              baseIntensity={0.1}
-              hoverIntensity={0.4}
-            >
+          <div className="mb-4 flex justify-center">
+            <h2 className="text-[clamp(1rem,3vw,2rem)] font-semibold text-[#c2a1ff] text-outline">
               Computer Engineering Student & Software Developer
-            </FuzzyText>
+            </h2>
           </div>
+
+
 
 
           {/* Buttons */}

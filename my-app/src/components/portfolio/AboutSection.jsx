@@ -6,7 +6,7 @@ export default function AboutSection() {
   const highlights = [
     {
       icon: Code,
-      title: "Full-Stack Development",
+      title: "Software Development",
       description: "Proficient in multiple programming languages and frameworks"
     },
     {
@@ -17,7 +17,7 @@ export default function AboutSection() {
     {
       icon: Gamepad2,
       title: "Game Development",
-      description: "Creating engaging games with Unity and custom engines"
+      description: "Creating engaging games with Unity"
     },
     {
       icon: Zap,
