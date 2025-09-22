@@ -15,7 +15,7 @@ export default function ProjectsSection({ onProjectClick }) {
       icon: Car,
       color: "bg-[var(--secondary)]",
       shortDescription: "RC car system with unlimited control range using Raspberry Pi 4 and cellular connectivity.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+      image: "/images/rccarSS.png",
       description: "Designed and assembled an RC car system with unlimited control range using Raspberry Pi 4 and SIM7600 module.",
       highlights: [
         "Created client-server architecture in C++ for real-time control streaming",
@@ -37,7 +37,7 @@ export default function ProjectsSection({ onProjectClick }) {
       icon: Gamepad2,
       color: "bg-[var(--primary)]",
       shortDescription: "Complete roguelike game with procedural generation ensuring unique gameplay experiences every run.",
-      image: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=400&h=300&fit=crop",
+      image: "/images/gameSS.png",
       description: "Developing a complete roguelike game with procedural generation, ensuring unique gameplay experiences every run.",
       highlights: [
         "Implemented procedural dungeon generation algorithm for infinite replayability",
@@ -72,8 +72,34 @@ export default function ProjectsSection({ onProjectClick }) {
         github: "https://github.com/MKJamzz",
         demo: null
       }
+    },
+
+    {
+      id: 4,
+      title: "Medication Dispenser",
+      period: "Nov 2023",
+      status: "Completed",
+      icon: BarChart3, // you can swap this with another Lucide icon (ex: Activity, Cpu, etc.)
+      color: "bg-[var(--secondary)]",
+      shortDescription: "Automated dispenser that reminds patients and releases correct dosages of medication.",
+      image: "/images/medSS.png", // put your own image here (assets/public)
+      description: "Built a medication dispenser using C++ and STM electronics that helps patients maintain their medication schedule.",
+      highlights: [
+        "Created an interface in C++ to manage patient schedules",
+        "Implemented LCD + LED alerts for reminders",
+        "Integrated conveyor belt with sensor detection for accurate dispensing",
+        "Developed pill sizing detection logic for single-dose release"
+      ],
+      technologies: ["C++", "Arduino", "STM32", "VSCode", "Github"],
+      links: {
+        github: "https://github.com/MKJamzz",
+        demo: null
+      }
     }
+
   ];
+
+  
 
   const scrollItems = projects.map((project) => {
     // Extract the raw color name (e.g., 'secondary', 'primary') from the project.color string
@@ -82,15 +108,12 @@ export default function ProjectsSection({ onProjectClick }) {
     
     return {
       content: (
-        <Card 
+        <Card
           key={project.id}
-          className="border-slate-200 shadow-lg star-border bg-white h-full cursor-pointer"
           onClick={() => onProjectClick(project)}
+          className="h-full cursor-pointer bg-black/40 text-white border border-white/10 backdrop-blur-sm rounded-xl transition-all duration-300 hover:border-[var(--primary)]"
           style={{
             transform: `rotate(${Math.random() * 10 - 5}deg)`,
-            background: 'rgba(20, 25, 40, 0.9)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            color: 'white'
           }}
         >
           <CardHeader className="pb-4">
@@ -108,7 +131,7 @@ export default function ProjectsSection({ onProjectClick }) {
             <CardTitle className="text-xl font-bold text-white mb-2">
               {project.title}
             </CardTitle>
-            <p className="text-sm text-slate-300 mb-3">{project.period}</p>
+            <p className="text-sm text-[#d1b2eb] mb-3">{project.period}</p>
             {project.image && (
               <div className="w-full h-32 mb-3 rounded-lg overflow-hidden">
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
@@ -118,7 +141,7 @@ export default function ProjectsSection({ onProjectClick }) {
           <CardContent>
             <DecryptedText
               text={project.shortDescription}
-              className="text-slate-300 leading-relaxed text-sm"
+              className="text-[#d1b2eb] leading-relaxed text-sm"
               speed={50}
               maxIterations={8}
               animateOn="view"
@@ -130,14 +153,14 @@ export default function ProjectsSection({ onProjectClick }) {
   });
 
   return (
-    <section id="projects" className="py-24 relative bg-white">
+    <section id="projects" className="py-24 relative bg-transparent">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6">Featured Projects</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6 text-outline">Featured Projects</h2>
           <div className="w-20 h-1 bg-[var(--primary)] mx-auto mb-8"></div>
           <DecryptedText
             text="A showcase of my technical projects ranging from hardware engineering to game development and data processing."
-            className="text-xl text-slate-500"
+            className="text-xl text-[#d1b2eb] text-outline"
             speed={50}
             maxIterations={10}
             animateOn="view"
@@ -147,7 +170,7 @@ export default function ProjectsSection({ onProjectClick }) {
         <InfiniteScroll
           width="24rem"
           items={scrollItems}
-          autoplaySpeed={60}
+          autoplaySpeed={40}
         />
       </div>
     </section>

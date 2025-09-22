@@ -90,14 +90,14 @@ export default function SkillsSection() {
   };
 
   return (
-    <section id="skills" className="py-24 relative bg-slate-50">
+    <section id="skills" className="py-24 relative bg-transparent">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6">Technical Skills</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6 text-outline">Technical Skills</h2>
           <div className="w-20 h-1 bg-[var(--primary)] mx-auto mb-8"></div>
           <DecryptedText
             text="A comprehensive overview of my technical expertise across programming languages, frameworks, hardware, and development tools."
-            className="text-xl text-slate-500 max-w-3xl mx-auto"
+            className="text-xl text-[#d1b2eb] max-w-3xl mx-auto text-outline"
             speed={20}
             maxIterations={10}
             animateOn="view"
@@ -106,7 +106,7 @@ export default function SkillsSection() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {skillCategories.map((category, index) => (
-            <Card key={index} className="border-slate-200 shadow-lg star-border bg-white">
+            <Card key={index} className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-4">
                   <div className={`w-12 h-12 ${category.color} rounded-xl flex items-center justify-center flex-shrink-0 bg-opacity-20`}>
@@ -135,12 +135,12 @@ export default function SkillsSection() {
         </div>
 
         <div className="mt-16 text-center">
-          <Card className="max-w-4xl mx-auto border-slate-200 shadow-lg bg-gradient-to-r from-purple-50 to-blue-50 star-border">
+          <Card className="max-w-4xl mx-auto bg-black/40 p-6 rounded-xl backdrop-blur-sm">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold text-[var(--text-dark)] mb-4">Always Learning</h3>
               <DecryptedText
                 text="Technology evolves rapidly, and so do I. Currently exploring advanced algorithms, machine learning applications, and cutting-edge hardware design to stay at the forefront of computer engineering innovation."
-                className="text-slate-600 text-lg leading-relaxed"
+                className="text-[#d1b2eb] text-lg leading-relaxed"
                 speed={20}
                 maxIterations={10}
                 animateOn="view"

@@ -1,0 +1,48 @@
+.fuzzy-img {
+  width: var(--size);
+  height: var(--size);
+}
+
+/* Shared for both colored layers */
+.fuzzy-img .layer {
+  mix-blend-mode: screen;
+  opacity: 0.35;
+  filter: blur(calc(1.1px * var(--base)));
+  animation: fuzzy-jitter 1200ms steps(2, end) infinite;
+  will-change: transform, filter, opacity;
+}
+
+/* Magenta-ish layer (left) */
+.fuzzy-img .layer-r {
+  transform: translateX(calc(-2px * var(--base)));
+  filter: hue-rotate(320deg) saturate(1.3)
+          blur(calc(1.1px * var(--base)));
+}
+
+/* Cyan-ish layer (right) */
+.fuzzy-img .layer-b {
+  transform: translateX(calc(2px * var(--base)));
+  filter: hue-rotate(200deg) saturate(1.3)
+          blur(calc(1.1px * var(--base)));
+}
+
+@keyframes fuzzy-jitter {
+  0%   { transform: translate(0,0); }
+  10%  { transform: translate(1px,-1px); }
+  20%  { transform: translate(-1px,1px); }
+  30%  { transform: translate(2px,1px); }
+  40%  { transform: translate(-2px,-1px); }
+  50%  { transform: translate(1px,2px); }
+  60%  { transform: translate(-1px,-2px); }
+  70%  { transform: translate(2px,-1px); }
+  80%  { transform: translate(-2px,1px); }
+  90%  { transform: translate(1px,1px); }
+  100% { transform: translate(0,0); }
+}
+
+/* Boost effect on hover */
+.fuzzy-img:hover .layer {
+  opacity: 0.55;
+  filter: blur(calc(1.4px * var(--hover)));
+  animation-duration: 600ms;
+}

@@ -3,18 +3,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Calendar, MapPin, Award } from "lucide-react";
 import DecryptedText from "./DecryptedText";
+import FuzzyText from "./FuzzyText";
 
 export default function EducationSection() {
   return (
-    <section id="education" className="py-24 bg-white">
+    <section id="education" className="py-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6">Education</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6 text-outline">Education</h2>
           <div className="w-20 h-1 bg-[var(--primary)] mx-auto mb-8"></div>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <Card className="border-slate-200 shadow-xl star-border transition-all duration-300 bg-white">
+          <Card className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
             <CardHeader className="pb-6">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
                 <div className="w-20 h-20 bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -27,7 +28,7 @@ export default function EducationSection() {
                   <p className="text-xl font-semibold text-[var(--primary)] mb-3">
                     University of Waterloo
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 text-slate-500">
+                  <div className="flex flex-col sm:flex-row gap-4 text-[#d1b2eb] font-semibold leading-relaxed">
                     <div className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       <span>2023 - 2028</span>
@@ -48,7 +49,7 @@ export default function EducationSection() {
               <div>
                 <DecryptedText
                   text="Currently pursuing a comprehensive Computer Engineering degree at one of Canada's top engineering universities. The program combines theoretical computer science foundations with practical hardware and software engineering skills."
-                  className="text-lg text-slate-600 leading-relaxed"
+                  className="text-lg text-[#d1b2eb] leading-relaxed"
                   speed={25}
                   maxIterations={12}
                   animateOn="view"
@@ -76,7 +77,7 @@ export default function EducationSection() {
                         <div className="w-1.5 h-1.5 bg-[var(--primary)] rounded-full mt-2 flex-shrink-0"></div>
                         <DecryptedText
                           text={subject}
-                          className="text-slate-500"
+                          className="text-[#d1b2eb]"
                           speed={15}
                           maxIterations={6}
                           animateOn="view"
@@ -89,31 +90,31 @@ export default function EducationSection() {
                 <div>
                   <h4 className="font-semibold text-[var(--text-dark)] mb-4">Academic Highlights</h4>
                   <div className="space-y-4">
-                    <div className="p-4 bg-purple-50 rounded-lg border-l-4 border-[var(--primary)]">
+                    <div className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
                       <h5 className="font-medium text-[var(--text-dark)] mb-1">Competitive Programming</h5>
                       <DecryptedText
                         text="Preparing students for Waterloo CCC contest, demonstrating mastery of algorithmic problem-solving and optimization techniques."
-                        className="text-sm text-slate-500"
+                        className="text-sm text-[#d1b2eb]"
                         speed={15}
                         maxIterations={6}
                         animateOn="view"
                       />
                     </div>
-                    <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-[var(--secondary)]">
+                    <div className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
                       <h5 className="font-medium text-[var(--text-dark)] mb-1">Co-op Program</h5>
                       <DecryptedText
                         text="Part of Waterloo's renowned co-operative education program, providing hands-on industry experience throughout my studies."
-                        className="text-sm text-slate-500"
+                        className="text-sm text-[#d1b2eb]"
                         speed={15}
                         maxIterations={6}
                         animateOn="view"
                       />
                     </div>
-                    <div className="p-4 bg-orange-50 rounded-lg border-l-4 border-[var(--accent)]">
+                    <div className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
                       <h5 className="font-medium text-[var(--text-dark)] mb-1">Project-Based Learning</h5>
                       <DecryptedText
                         text="Emphasis on practical application through comprehensive projects in hardware design, software development, and system integration."
-                        className="text-sm text-slate-500"
+                        className="text-sm text-[#d1b2eb]"
                         speed={15}
                         maxIterations={6}
                         animateOn="view"
@@ -123,9 +124,9 @@ export default function EducationSection() {
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-slate-200">
+              <div className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm"> 
                 <h4 className="font-semibold text-[var(--text-dark)] mb-3">Expected Graduation</h4>
-                <p className="text-slate-600">
+                <p className="text-[#d1b2eb]">
                   <span className="font-medium">2028</span> - Bachelor of Computer Engineering with Honours
                 </p>
               </div>

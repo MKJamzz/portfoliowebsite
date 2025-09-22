@@ -1,72 +1,85 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Download, Mail } from "lucide-react";
+import FuzzyImage from "../FuzzyImage";
 import FuzzyText from "./FuzzyText";
 import DecryptedText from "./DecryptedText";
+import Dither from "./Dither"; // adjust path if needed
 
 export default function HeroSection() {
   const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-32 text-center">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
+
+
+      {/* Foreground content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
         <div className="animate-fade-in-up">
-          {/* Profile Image */}
-          <div className="w-40 h-40 mx-auto mb-12 rounded-full overflow-hidden shadow-2xl border-4 border-slate-100">
-            <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68cd5005490ad54dbd3afe4a/7442acfd2_IMG_3276.jpg" 
-              alt="Michael Whiteman"
-              className="w-full h-full object-cover"
-            />
+          {/* Profile Image with fuzzy effect */}
+          <div className="mx-auto mb-12">
+            <FuzzyImage
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68cd5005490ad54dbd3afe4a/7442acfd2_IMG_3276.jpg"
+                alt="Michael Whiteman"
+                size={160}
+                shape="circle"
+                baseIntensity={0.3}
+                hoverIntensity={1}
+                className="mx-auto mb-12 shadow-2xl border-4 border-slate-100"
+              />
+
           </div>
-          
-          <div className="mb-8">
-            <FuzzyText 
-              fontSize="clamp(3rem, 12vw, 8rem)"
+
+          {/* Name */}
+          <div className="mb-8 w-full overflow-visible">
+            <FuzzyText
+              className="font-tech"
+              fontSize="clamp(2.5rem, 8vw, 6rem)"
               fontWeight={900}
-              color="var(--text-dark)"
+              color="#c2a1ff"
               baseIntensity={0.15}
               hoverIntensity={0.6}
             >
               Michael Whiteman
             </FuzzyText>
           </div>
-          
-          <div className="mb-8">
-            <DecryptedText
-              text="Computer Engineering Student & Software Developer"
-              className="text-xl md:text-2xl font-light text-[var(--text-muted)]"
-              speed={30}
-              maxIterations={15}
-              animateOn="view"
-            />
+
+          {/* Subtitle */}
+          <div className="mb-6 flex justify-center">
+            <FuzzyText
+              fontSize="clamp(1rem, 3vw, 2rem)"   // much smaller
+              fontWeight={700}                    // still bold but not overwhelming
+              color="#c2a1ff"
+              baseIntensity={0.1}
+              hoverIntensity={0.4}
+            >
+              Computer Engineering Student & Software Developer
+            </FuzzyText>
           </div>
-          
-          <div className="mb-12 max-w-4xl mx-auto">
-            <DecryptedText
-              text="Passionate about creating innovative solutions through code. Currently pursuing Computer Engineering at University of Waterloo with hands-on experience in software development, game design, and hardware projects."
-              className="text-lg text-slate-600 leading-relaxed"
-              speed={20}
-              maxIterations={8}
-              sequential={false}
-              animateOn="view"
-            />
-          </div>
-          
+
+
+          {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-[var(--primary)] hover:opacity-90 text-white px-8 py-3 text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document.getElementById("contact")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
             >
               <Mail className="w-5 h-5 mr-2" />
               Get In Touch
             </Button>
-            
-            <Button 
-              variant="outline" 
+
+            <Button
+              variant="outline"
               size="lg"
               className="border-slate-300 text-[var(--text-dark)] hover:bg-slate-50 px-8 py-3 text-lg font-medium"
             >
@@ -76,14 +89,8 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      
-      {/* Scroll Indicator */}
-      <button 
-        onClick={scrollToAbout}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-slate-400 hover:text-[var(--primary)] transition-colors"
-      >
-        <ChevronDown className="w-8 h-8" />
-      </button>
+
+     
     </section>
   );
 }

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 @plugin "tailwindcss-animate";
 @import "tw-animate-css";
@@ -21,11 +22,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --text-muted: #c2a1ff;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #c2a1ff;
   text-decoration: inherit;
 }
 a:hover {
@@ -150,6 +152,14 @@ button:focus-visible {
   --sidebar-ring: oklch(0.705 0.015 286.067);
 }
 
+.text-outline {
+  text-shadow:
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000; /* black outline */
+}
+
 .dark {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
@@ -191,4 +201,5 @@ button:focus-visible {
   body {
     @apply bg-background text-foreground;
   }
+  
 }

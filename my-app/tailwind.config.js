@@ -28,8 +28,11 @@ export default {
         primary: "#7c3aed",
         secondary: "#9333ea",
         dark: "#0f172a",
-        muted: "#64748b",
+        muted: "#d0a1e3ff",
         "background-alt": "#f8fafc",
+      },
+      fontFamily: {
+        tech: ['"Share Tech Mono"', "monospace"],
       },
     },
   },

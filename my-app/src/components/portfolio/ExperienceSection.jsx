@@ -61,14 +61,14 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" className="py-24 bg-white">
+    <section id="experience" className="py-24 relative bg-transparent">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6">Work Experience</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6 text-outline">Work Experience</h2>
           <div className="w-20 h-1 bg-[var(--primary)] mx-auto mb-8"></div>
           <DecryptedText
             text="From teaching the next generation of programmers to founding my own business, here's my professional journey."
-            className="text-xl text-slate-500 max-w-3xl mx-auto"
+            className="text-xl text-[#d1b2eb] max-w-3xl mx-auto text-outline"
             speed={20}
             maxIterations={10}
             animateOn="view"
@@ -77,7 +77,7 @@ export default function ExperienceSection() {
 
         <div className="space-y-8">
           {experiences.map((exp, index) => (
-            <Card key={index} className="border-slate-200 shadow-lg star-border bg-white">
+            <Card key={index} className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="flex items-start gap-4">
@@ -90,7 +90,7 @@ export default function ExperienceSection() {
                         {exp.title}
                       </CardTitle>
                       <p className="text-lg font-semibold text-[var(--primary)] mb-2">{exp.company}</p>
-                      <div className="flex flex-col sm:flex-row gap-4 text-sm text-slate-500">
+                      <div className="flex flex-col sm:flex-row gap-4 text-sm text-[#d1b2eb]">
                         <div className="flex items-center gap-1.5">
                           <Calendar className="w-4 h-4" />
                           {exp.period}
@@ -102,7 +102,7 @@ export default function ExperienceSection() {
                       </div>
                     </div>
                   </div>
-                  <Badge variant="secondary" className="self-start bg-slate-100 text-slate-700 border-slate-200 font-medium">
+                  <Badge variant="secondary" className="self-start bg-black/40 text-[#d1b2eb] border-[var(--primary)] font-medium backdrop-blur-sm">
                     {exp.type}
                   </Badge>
                 </div>
@@ -110,7 +110,7 @@ export default function ExperienceSection() {
               <CardContent>
                 <DecryptedText
                   text={exp.description}
-                  className="text-slate-600 mb-4 leading-relaxed"
+                  className="text-[#d1b2eb] mb-4 leading-relaxed"
                   speed={25}
                   maxIterations={12}
                   animateOn="view"
@@ -124,7 +124,7 @@ export default function ExperienceSection() {
                         <div className="w-1.5 h-1.5 bg-[var(--primary)] rounded-full mt-2 flex-shrink-0"></div>
                         <DecryptedText
                           text={achievement}
-                          className="text-slate-500"
+                          className="text-[#d1b2eb]"
                           speed={20}
                           maxIterations={8}
                           animateOn="view"
@@ -138,7 +138,7 @@ export default function ExperienceSection() {
                   <h4 className="font-semibold text-[var(--text-dark)] mb-3">Technologies & Skills:</h4>
                   <div className="flex flex-wrap gap-2">
                     {exp.skills.map((skill, idx) => (
-                      <Badge key={idx} variant="outline" className="bg-slate-50 text-slate-700 border-slate-200">
+                      <Badge key={idx} variant="outline" className="bg-black/40 text-[#d1b2eb] border-[var(--primary)] backdrop-blur-sm">
                         {skill}
                       </Badge>
                     ))}
