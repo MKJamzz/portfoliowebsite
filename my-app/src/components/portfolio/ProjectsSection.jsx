@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Car, Gamepad2, BarChart3 } from "lucide-react";
+import { Car, Gamepad2, BarChart3, Code} from "lucide-react";
 import InfiniteScroll from "./InfiniteScroll";
 import DecryptedText from "./DecryptedText";
 
@@ -94,6 +94,29 @@ export default function ProjectsSection({ onProjectClick }) {
       links: {
         github: "https://github.com/MKJamzz",
         demo: null
+      }
+    },
+    
+    {
+      id: 5,
+      title: "Personal Portfolio Website",
+      period: "Sept 2025 - Present",
+      status: "Completed",
+      icon: Code, // you can also use Globe, Monitor, or Layout from lucide-react
+      color: "bg-[var(--primary)]",
+      shortDescription: "Responsive personal portfolio website built with React, Vite, and Tailwind CSS, deployed on Cloudflare.",
+      image: "/images/websiteSS.png", // add a screenshot of your website into public/images
+      description: "Designed and developed a responsive personal portfolio website to showcase projects, technical experience, and skills. Built with modern web technologies and styled with Tailwind CSS for a sleek, interactive design.",
+      highlights: [
+        "Built with React and Vite for fast, modular development",
+        "Styled with Tailwind CSS and custom components for a modern, techy aesthetic",
+        "Deployed on Cloudflare Pages with a custom domain (michaelw.cool)",
+        "Showcases technical projects, professional highlights, and personal brand"
+      ],
+      technologies: ["React", "Vite", "Tailwind CSS", "Cloudflare", "Github"],
+      links: {
+        github: "https://github.com/MKJamzz", // replace with your portfolio repo if public
+        demo: "https://michaelw.cool" // your live site
       }
     }
 
