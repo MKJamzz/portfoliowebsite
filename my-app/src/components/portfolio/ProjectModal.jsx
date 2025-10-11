@@ -97,26 +97,27 @@ export default function ProjectModal({ project, onClose }) {
               </div>
             </div>
 
-            <div className="flex gap-4 pt-4 border-t border-slate-200">
-              <Button
-                asChild
-                variant="outline"
-                className="flex-1"
-              >
-                <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                  <Github className="w-5 h-5 mr-2" />
-                  View Code
-                </a>
-              </Button>
-              {project.links.demo && (
-                <Button asChild className="flex-1 bg-[var(--primary)] hover:opacity-90">
-                  <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="w-5 h-5 mr-2" />
-                    Live Demo
-                  </a>
-                </Button>
-              )}
-            </div>
+            {(project.links.github || project.links.demo) && (
+              <div className="flex gap-4 pt-4 border-t relative bg-transparent">
+                {project.links.github && (
+                  <Button asChild variant="outline" className="flex-1">
+                    <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="w-5 h-5 mr-2" />
+                      View Code
+                    </a>
+                  </Button>
+                )}
+
+                {project.links.demo && (
+                  <Button asChild className="flex-1 bg-[var(--primary)] hover:opacity-90">
+                    <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="w-5 h-5 mr-2" />
+                      Live Demo
+                    </a>
+                  </Button>
+                )}
+              </div>
+            )}
           </CardContent>
         </Card>
       </motion.div>
