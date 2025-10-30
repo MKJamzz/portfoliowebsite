@@ -68,7 +68,7 @@ export default function ProjectsSection() {
         "Built comprehensive resource systems and player progression mechanics",
         "Created shop systems, enemy AI, and loot drop mechanics",
       ],
-      technologies: [
+      technologies: [ //hi
         "Unity",
         "C#",
         "Procedural Generation",
