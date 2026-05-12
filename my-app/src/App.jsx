@@ -95,6 +95,17 @@ My experience ranges from low-level hardware programming to high-level software 
     {id:"cv",label:"DATAFILE // RESUME",   val:"whiteman_resume.pdf",              icon:"▤",href:"#",                                                   hint:"DOWNLOAD PDF"},
   ],
   questLog: [
+    {year:"2026",title:"SOFTWARE ENGINEER",org:"PINKBYTE",
+     period:"Jan 2026 – Apr 2026",location:"Vaughan, Ontario",
+     desc:"Hired as a software engineer and contributed across fullstack development, embedded systems, and 3D modelling on multiple concurrent projects.",
+     achievements:[
+       "Built a fullstack web application using React, JavaScript, CSS, C++, MySQL, and SQLite3",
+       "Implemented a multithreaded alert system to handle real-time event notifications",
+       "Developed secure user authentication with JWT-based login and session management",
+       "Created a live database interface allowing admins to connect, query, and modify records through the web UI",
+       "Prototyped wireless serial communication via Raspberry Pi, translating commands into opcodes for a HERO robot",
+       "3D modelled a carbon fibre Raspberry Pi enclosure for internal company use",
+     ]},
     {year:"2024",title:"CODING INSTRUCTOR",org:"CODE NINJAS RICHMOND HILL",
      period:"Sept 2024 – Dec 2024",location:"Richmond Hill, Ontario",
      desc:"Mentored 30+ students aged 6–13 through key coding concepts, game development, and competitive programming.",
@@ -105,7 +116,7 @@ My experience ranges from low-level hardware programming to high-level software 
        "Developed curriculum for Roblox Studio, Unity, and Minecraft modding",
      ]},
     {year:"2024",title:"FOUNDER",org:"SIMPL — STREETWEAR BRAND",
-     period:"Jan 2024 – Sept 2024",location:"Newmarket, Ontario",
+     period:"Jan 2024 – May 2024",location:"Newmarket, Ontario",
      desc:"Founded and operated a streetwear clothing brand focused on creativity, quality, and affordability — handled everything from product design to fulfillment.",
      achievements:[
        "Built e-commerce website using Shopify, CSS, and HTML with custom UI elements",
@@ -121,6 +132,14 @@ My experience ranges from low-level hardware programming to high-level software 
        "Maintained quality standards through meticulous inspection processes",
        "Demonstrated precision in producing aluminum stencils for various applications",
        "Operated SmartCut, CircuitCam8, and VCam software systems",
+     ]},
+    {year:"2022",title:"FRONT END WORKER",org:"FOOD BASICS",
+     period:"Dec 2022 – Jun 2023",location:"Newmarket, Ontario",
+     desc:"Provided exceptional customer service on the store floor, ensuring a smooth and positive shopping experience.",
+     achievements:[
+       "Assisted customers with product location, inquiries, and checkout processes",
+       "Maintained organized and well-stocked front-end areas throughout shifts",
+       "Collaborated with team members to meet daily operational targets",
      ]},
   ],
   lore: [
@@ -377,15 +396,10 @@ const CharacterScreen=()=>(
   <div className="sy" style={{height:'100%',padding:'20px 10px 20px 20px'}} data-screen-label="CHARACTER">
     <div style={{display:'flex',gap:'20px',marginBottom:'20px'}}>
       <div style={{flexShrink:0,width:'118px'}}>
-        <div style={{border:'1px solid var(--bd)',background:'var(--bg)',padding:'9px 7px',fontFamily:'monospace',fontSize:'10px',lineHeight:'1.45',color:'var(--g)',textShadow:'0 0 5px var(--g)',whiteSpace:'pre'}}>
-{` ╔══════╗
- ║  ◉◉  ║
- ║   ▿  ║
- ║ ════ ║
- ╚══════╝
-  ║╔══╗║
-  ║║MW║║
-   ╚══╝`}
+        <div style={{position:'relative',border:'1px solid var(--bd)',background:'var(--bg)',overflow:'hidden',boxShadow:'0 0 12px rgba(0,255,136,0.3),0 0 3px var(--g)'}}>
+          <img src="/images/character.png" alt="Michael Whiteman" style={{width:'100%',display:'block',filter:'grayscale(0.45) sepia(0.25) hue-rotate(100deg) contrast(1.15) brightness(0.82)'}}/>
+          <div style={{position:'absolute',inset:0,background:'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 3px)',pointerEvents:'none'}}/>
+          <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at center,transparent 50%,rgba(0,255,136,0.06) 100%)',pointerEvents:'none'}}/>
         </div>
         <div style={{marginTop:'9px',border:'1px solid var(--bd)',padding:'9px',background:'var(--bg)',display:'grid',gap:'8px'}}>
           {[{l:'CLASS',v:'ENG',c:'var(--t)'},{l:'LEVEL',v:'04',c:'var(--g)'},{l:'XP',v:'9,800',c:'var(--g)'}].map(r=>(
@@ -702,14 +716,13 @@ const RadialMenu=({onSelect})=>{
           );
         })}
       </svg>
-      <div style={{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',textAlign:'center',zIndex:2,pointerEvents:'none',width:'150px'}}>
-        <div style={{fontFamily:'monospace',fontSize:'9.5px',lineHeight:'1.45',color:'var(--g)',textShadow:'0 0 6px var(--g)',whiteSpace:'pre',display:'inline-block'}}>
-{` ╔════╗
- ║◉◉  ║
- ║ ▿  ║
- ╚════╝`}
+      <div style={{position:'absolute',left:'50%',top:'calc(50% + 33px)',transform:'translate(-50%,-50%)',display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',zIndex:2,pointerEvents:'none',width:'160px'}}>
+        <div style={{position:'relative',width:'80px',height:'80px',flexShrink:0,borderRadius:'50%',overflow:'hidden',border:'1px solid var(--g)',boxShadow:'0 0 12px rgba(0,255,136,0.4),0 0 3px var(--g)'}}>
+          <img src="/images/profile.png" alt="Michael Whiteman" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top',filter:'grayscale(0.35) sepia(0.2) hue-rotate(100deg) contrast(1.1) brightness(0.85)'}}/>
+          <div style={{position:'absolute',inset:0,borderRadius:'50%',background:'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 3px)',pointerEvents:'none'}}/>
+          <div style={{position:'absolute',inset:0,borderRadius:'50%',background:'radial-gradient(ellipse at center,transparent 50%,rgba(0,255,136,0.08) 100%)',pointerEvents:'none'}}/>
         </div>
-        <div className="px glow" style={{fontSize:'6.5px',marginTop:'4px',letterSpacing:'1px'}}>MICHAEL W.</div>
+        <div className="px glow" style={{fontSize:'6.5px',marginTop:'14px',letterSpacing:'1px'}}>MICHAEL W.</div>
         <RoleCycler/>
         <div style={{height:'18px',marginTop:'4px'}}>
           {hov&&(

@@ -19,12 +19,12 @@ export default function HeroSection() {
 
 
       {/* Foreground content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-28 text-center">
         <div className="animate-fade-in-up">
           {/* Profile Image with fuzzy effect */}
           <div className="mx-auto mb-12">
             <FuzzyImage
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/68cd5005490ad54dbd3afe4a/7442acfd2_IMG_3276.jpg"
+                src="/images/profile.png"
                 alt="Michael Whiteman"
                 size={160}
                 shape="circle"
