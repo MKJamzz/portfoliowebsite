@@ -189,6 +189,54 @@ My experience ranges from low-level hardware programming to high-level software 
     {id:"photo",    icon:"◈", name:"PHOTO",       sub:"35MM // LIFESTYLE",         count:32, color:"t", thumb:"photo",
      tags:["FILM","STREET","PORTRAIT"],
      items:Array.from({length:12},(_,i)=>({label:`ROLL_${String(i+1).padStart(2,'0')}`,   kind:"FILM"}))},
+    {id:"japan2026",icon:"▲", name:"JAPAN 2026",  sub:"TRAVEL // SPRING CAPTURE",  count:43, color:"g", thumb:"japan2026",
+     thumbUrl:"/Japan2026Pics/IMG_1001.jpg",
+     tags:["JAPAN","TOKYO","2026","SPRING"],
+     items:[
+       {label:"IMG_1001",kind:"PHOTO",url:"/Japan2026Pics/IMG_1001.jpg"},
+       {label:"IMG_1008",kind:"PHOTO",url:"/Japan2026Pics/IMG_1008.jpg"},
+       {label:"IMG_1059",kind:"PHOTO",url:"/Japan2026Pics/IMG_1059.jpg"},
+       {label:"IMG_1093",kind:"PHOTO",url:"/Japan2026Pics/IMG_1093.jpg"},
+       {label:"IMG_1096",kind:"PHOTO",url:"/Japan2026Pics/IMG_1096.jpg"},
+       {label:"IMG_1149",kind:"PHOTO",url:"/Japan2026Pics/IMG_1149.jpg"},
+       {label:"IMG_1161",kind:"PHOTO",url:"/Japan2026Pics/IMG_1161.jpg"},
+       {label:"IMG_1200",kind:"PHOTO",url:"/Japan2026Pics/IMG_1200.jpg"},
+       {label:"IMG_1207",kind:"PHOTO",url:"/Japan2026Pics/IMG_1207.jpg"},
+       {label:"IMG_1228",kind:"PHOTO",url:"/Japan2026Pics/IMG_1228.jpg"},
+       {label:"IMG_1233",kind:"PHOTO",url:"/Japan2026Pics/IMG_1233.jpg"},
+       {label:"IMG_1298",kind:"PHOTO",url:"/Japan2026Pics/IMG_1298.jpg"},
+       {label:"IMG_1329",kind:"PHOTO",url:"/Japan2026Pics/IMG_1329.jpg"},
+       {label:"IMG_1346",kind:"PHOTO",url:"/Japan2026Pics/IMG_1346.jpg"},
+       {label:"IMG_1376",kind:"PHOTO",url:"/Japan2026Pics/IMG_1376.jpg"},
+       {label:"IMG_1394",kind:"PHOTO",url:"/Japan2026Pics/IMG_1394.jpg"},
+       {label:"IMG_1414",kind:"PHOTO",url:"/Japan2026Pics/IMG_1414.jpg"},
+       {label:"IMG_1438",kind:"PHOTO",url:"/Japan2026Pics/IMG_1438.jpg"},
+       {label:"IMG_1448",kind:"PHOTO",url:"/Japan2026Pics/IMG_1448.jpg"},
+       {label:"IMG_1482",kind:"PHOTO",url:"/Japan2026Pics/IMG_1482.jpg"},
+       {label:"IMG_1491",kind:"PHOTO",url:"/Japan2026Pics/IMG_1491.jpg"},
+       {label:"IMG_1506",kind:"PHOTO",url:"/Japan2026Pics/IMG_1506.jpg"},
+       {label:"IMG_1530",kind:"PHOTO",url:"/Japan2026Pics/IMG_1530.jpg"},
+       {label:"IMG_1547",kind:"PHOTO",url:"/Japan2026Pics/IMG_1547.jpg"},
+       {label:"IMG_1607",kind:"PHOTO",url:"/Japan2026Pics/IMG_1607.jpg"},
+       {label:"IMG_1623",kind:"PHOTO",url:"/Japan2026Pics/IMG_1623.jpg"},
+       {label:"IMG_1653",kind:"PHOTO",url:"/Japan2026Pics/IMG_1653.jpg"},
+       {label:"IMG_1667",kind:"PHOTO",url:"/Japan2026Pics/IMG_1667.jpg"},
+       {label:"IMG_1684",kind:"PHOTO",url:"/Japan2026Pics/IMG_1684.jpg"},
+       {label:"IMG_1746",kind:"PHOTO",url:"/Japan2026Pics/IMG_1746.jpg"},
+       {label:"IMG_1749",kind:"PHOTO",url:"/Japan2026Pics/IMG_1749.jpg"},
+       {label:"IMG_1759",kind:"PHOTO",url:"/Japan2026Pics/IMG_1759.jpg"},
+       {label:"IMG_1788",kind:"PHOTO",url:"/Japan2026Pics/IMG_1788.jpg"},
+       {label:"IMG_1821",kind:"PHOTO",url:"/Japan2026Pics/IMG_1821.jpg"},
+       {label:"IMG_1828",kind:"PHOTO",url:"/Japan2026Pics/IMG_1828.jpg"},
+       {label:"IMG_1833",kind:"PHOTO",url:"/Japan2026Pics/IMG_1833.jpg"},
+       {label:"IMG_1837",kind:"PHOTO",url:"/Japan2026Pics/IMG_1837.jpg"},
+       {label:"IMG_1857",kind:"PHOTO",url:"/Japan2026Pics/IMG_1857.jpg"},
+       {label:"IMG_1861",kind:"PHOTO",url:"/Japan2026Pics/IMG_1861.jpg"},
+       {label:"IMG_1871",kind:"PHOTO",url:"/Japan2026Pics/IMG_1871.jpg"},
+       {label:"IMG_1876",kind:"PHOTO",url:"/Japan2026Pics/IMG_1876.jpg"},
+       {label:"IMG_1878",kind:"PHOTO",url:"/Japan2026Pics/IMG_1878.jpg"},
+       {label:"IMG_1889",kind:"PHOTO",url:"/Japan2026Pics/IMG_1889.jpg"},
+     ]},
   ],
 };
 
@@ -420,7 +468,7 @@ const CharacterScreen=()=>(
     <div style={{display:'flex',gap:'20px',marginBottom:'20px'}}>
       <div style={{flexShrink:0,width:'118px'}}>
         <div style={{position:'relative',border:'1px solid var(--bd)',background:'var(--bg)',overflow:'hidden',boxShadow:'0 0 12px rgba(0,255,136,0.3),0 0 3px var(--g)'}}>
-          <img src="/images/character.png" alt="Michael Whiteman" style={{width:'100%',display:'block',filter:'grayscale(0.45) sepia(0.25) hue-rotate(100deg) contrast(1.15) brightness(0.82)'}}/>
+          <img src="/images/character.png" alt="Michael Whiteman" loading="lazy" decoding="async" style={{width:'100%',display:'block',filter:'grayscale(0.45) sepia(0.25) hue-rotate(100deg) contrast(1.15) brightness(0.82)'}}/>
           <div style={{position:'absolute',inset:0,background:'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 3px)',pointerEvents:'none'}}/>
           <div style={{position:'absolute',inset:0,background:'radial-gradient(ellipse at center,transparent 50%,rgba(0,255,136,0.06) 100%)',pointerEvents:'none'}}/>
         </div>
@@ -654,7 +702,7 @@ const LoreScreen=()=>(
 // To use a real image: add thumbUrl to the folder data object; FolderThumb renders <img> when present
 const FolderThumb=({kind,accent,thumbUrl})=>{
   const base={width:'100%',height:'100%',display:'block'};
-  if(thumbUrl)return <img src={thumbUrl} alt={kind} style={{...base,objectFit:'cover'}}/>;
+  if(thumbUrl)return <img src={thumbUrl} alt={kind} loading="lazy" decoding="async" style={{...base,objectFit:'cover'}}/>;
   if(kind==='trips')return(
     <svg viewBox="0 0 120 70" style={base} preserveAspectRatio="none">
       <line x1="0" y1="58" x2="120" y2="58" stroke={accent} strokeWidth=".6" strokeDasharray="2 3" opacity=".4"/>
@@ -730,6 +778,11 @@ const CreativeArchive=({onClose})=>{
   const [folder,setFolder]=useState(null);
   const [hov,setHov]=useState(null);
   const [closing,setClosing]=useState(false);
+
+  useEffect(()=>{
+    document.body.classList.add('creative-open');
+    return()=>document.body.classList.remove('creative-open');
+  },[]);
 
   useEffect(()=>{
     if(phase!=='load')return;
@@ -948,21 +1001,26 @@ const CreativeArchive=({onClose})=>{
                 <div key={i} className="ca-thumb" style={{animation:`ca-thumb-in .3s ${i*40}ms ease both`}}
                   onMouseEnter={sndNav} onClick={sndSel}>
                   <div className="ca-thumb-stripes"/>
-                  <div style={{position:'absolute',top:4,left:4,width:9,height:9,borderTop:'1px solid var(--t)',borderLeft:'1px solid var(--t)',opacity:.6}}/>
-                  <div style={{position:'absolute',bottom:4,right:4,width:9,height:9,borderBottom:'1px solid var(--t)',borderRight:'1px solid var(--t)',opacity:.6}}/>
-                  <div style={{position:'relative',textAlign:'center',padding:'10px'}}>
-                    <div style={{fontSize:'24px',color:'var(--vd)',marginBottom:'6px'}}>▣</div>
-                    <div style={{fontSize:'12px',color:'var(--t)',letterSpacing:'1px',marginBottom:'2px'}}>{it.kind}</div>
-                    <div style={{fontSize:'15px',color:'var(--dm)',fontFamily:'monospace',wordBreak:'break-all'}}>{it.label}</div>
-                  </div>
-                  <div style={{position:'absolute',bottom:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--g),transparent)',opacity:.4}}/>
+                  <div style={{position:'absolute',top:4,left:4,width:9,height:9,borderTop:'1px solid var(--t)',borderLeft:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
+                  <div style={{position:'absolute',bottom:4,right:4,width:9,height:9,borderBottom:'1px solid var(--t)',borderRight:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
+                  {it.url
+                    ? <img src={it.url} alt={it.label} loading="lazy" decoding="async" style={{width:'100%',height:'100%',objectFit:'cover',display:'block',position:'absolute',inset:0}}/>
+                    : <div style={{position:'relative',textAlign:'center',padding:'10px'}}>
+                        <div style={{fontSize:'24px',color:'var(--vd)',marginBottom:'6px'}}>▣</div>
+                        <div style={{fontSize:'12px',color:'var(--t)',letterSpacing:'1px',marginBottom:'2px'}}>{it.kind}</div>
+                        <div style={{fontSize:'15px',color:'var(--dm)',fontFamily:'monospace',wordBreak:'break-all'}}>{it.label}</div>
+                      </div>
+                  }
+                  <div style={{position:'absolute',bottom:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--g),transparent)',opacity:.4,zIndex:2}}/>
                 </div>
               ))}
             </div>
-            <div style={{marginTop:'22px',padding:'12px 16px',border:'1px dashed var(--bd)',background:'rgba(0,0,0,.3)',
-              fontSize:'15px',color:'var(--vd)',textAlign:'center',letterSpacing:'1px'}}>
-              — PLACEHOLDER GRID // DROP IN REAL {folder.name} ASSETS WHEN READY —
-            </div>
+            {!folder.items.some(it=>it.url) && (
+              <div style={{marginTop:'22px',padding:'12px 16px',border:'1px dashed var(--bd)',background:'rgba(0,0,0,.3)',
+                fontSize:'15px',color:'var(--vd)',textAlign:'center',letterSpacing:'1px'}}>
+                — PLACEHOLDER GRID // DROP IN REAL {folder.name} ASSETS WHEN READY —
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -1053,7 +1111,7 @@ const RadialMenu=({onSelect})=>{
       </svg>
       <div style={{position:'absolute',left:'50%',top:'calc(50% + 33px)',transform:'translate(-50%,-50%)',display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center',zIndex:2,pointerEvents:'none',width:'160px'}}>
         <div style={{position:'relative',width:'80px',height:'80px',flexShrink:0,borderRadius:'50%',overflow:'hidden',border:'1px solid var(--g)',boxShadow:'0 0 12px rgba(0,255,136,0.4),0 0 3px var(--g)'}}>
-          <img src="/images/profile.png" alt="Michael Whiteman" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top',filter:'grayscale(0.35) sepia(0.2) hue-rotate(100deg) contrast(1.1) brightness(0.85)'}}/>
+          <img src="/images/profile.png" alt="Michael Whiteman" loading="eager" decoding="async" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center top',filter:'grayscale(0.35) sepia(0.2) hue-rotate(100deg) contrast(1.1) brightness(0.85)'}}/>
           <div style={{position:'absolute',inset:0,borderRadius:'50%',background:'repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 3px)',pointerEvents:'none'}}/>
           <div style={{position:'absolute',inset:0,borderRadius:'50%',background:'radial-gradient(ellipse at center,transparent 50%,rgba(0,255,136,0.08) 100%)',pointerEvents:'none'}}/>
         </div>
