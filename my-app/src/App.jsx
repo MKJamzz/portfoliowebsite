@@ -167,6 +167,29 @@ My experience ranges from low-level hardware programming to high-level software 
        "Published on itch.io",
      ]},
   ],
+  // ── ADD NEW FOLDERS HERE — one object per folder ──────────────────────────
+  // Fields: id, icon, name, sub, count, color ("g"|"t"), thumb (FolderThumb kind), tags[], items[]
+  // To use a real image instead of SVG: add thumbUrl:"/path/to/img.jpg" — FolderThumb renders it automatically
+  creativeFolders: [
+    {id:"trips",    icon:"▲", name:"TRIPS",      sub:"TRAVEL // FIELD CAPTURE",   count:24, color:"g", thumb:"trips",
+     tags:["KYOTO","ICELAND","NYC","LISBON"],
+     items:Array.from({length:12},(_,i)=>({label:`IMG_${String(2031+i).padStart(4,'0')}`,kind:"PHOTO"}))},
+    {id:"drawings", icon:"◇", name:"DRAWINGS",   sub:"SKETCHES // INK & DIGITAL", count:18, color:"t", thumb:"drawings",
+     tags:["INK","DIGITAL","PROCREATE","STUDY"],
+     items:Array.from({length:9}, (_,i)=>({label:`SKETCH_${String(i+1).padStart(2,'0')}`, kind:"DRAWING"}))},
+    {id:"devlogs",  icon:"▣", name:"DEVLOGS",    sub:"VIDEO // PROCESS LOGS",     count:7,  color:"g", thumb:"devlogs",
+     tags:["UNITY","STM32","ROBOTICS"],
+     items:Array.from({length:6}, (_,i)=>({label:`DEVLOG_EP${String(i+1).padStart(2,'0')}`,kind:"VIDEO"}))},
+    {id:"wear",     icon:"◆", name:"STREETWEAR", sub:"BRAND // GARMENT & PRINT",  count:14, color:"t", thumb:"wear",
+     tags:["TEES","HOODIES","LOOKBOOK","GRAPHICS"],
+     items:Array.from({length:8}, (_,i)=>({label:`DROP_${String(i+1).padStart(2,'0')}`,   kind:"DESIGN"}))},
+    {id:"gameart",  icon:"◉", name:"GAME ART",   sub:"PIXEL // CONCEPT // UI",    count:21, color:"g", thumb:"gameart",
+     tags:["CTRL'D","STEAMED","SPRITES"],
+     items:Array.from({length:10},(_,i)=>({label:`ASSET_${String(i+1).padStart(2,'0')}`,  kind:"ART"}))},
+    {id:"photo",    icon:"◈", name:"PHOTO",       sub:"35MM // LIFESTYLE",         count:32, color:"t", thumb:"photo",
+     tags:["FILM","STREET","PORTRAIT"],
+     items:Array.from({length:12},(_,i)=>({label:`ROLL_${String(i+1).padStart(2,'0')}`,   kind:"FILM"}))},
+  ],
 };
 
 // ══════════════════════════════════════════════════════
@@ -627,24 +650,336 @@ const LoreScreen=()=>(
   </div>
 );
 
-const CreativeScreen=()=>(
-  <div className="sy" style={{height:'100%',padding:'20px 10px 20px 20px'}} data-screen-label="CREATIVE">
-    <div className="sec-label"><span className="glow">◆</span> CREATIVE CONTENT</div>
-    <div style={{border:'1px solid var(--bd)',padding:'18px 20px',background:'var(--bg)',marginBottom:'14px'}}>
-      <div className="px glow" style={{fontSize:'7px',marginBottom:'6px'}}>CONTENT STAGING AREA</div>
-      <div style={{fontSize:'17px',color:'var(--dm)',lineHeight:'1.5'}}>Videos, drawings, devlogs, and creative work will be posted here. Check back soon.</div>
-    </div>
-    <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'8px'}}>
-      {Array.from({length:6}).map((_,i)=>(
-        <div key={i} style={{border:'1px solid var(--bd)',aspectRatio:'16/9',background:'var(--bg)',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden'}}>
-          <div style={{position:'absolute',inset:0,backgroundImage:'repeating-linear-gradient(45deg,var(--bd) 0,var(--bd) 1px,transparent 0,transparent 50%)',backgroundSize:'8px 8px',opacity:.5}}/>
-          <span style={{position:'relative',fontSize:'20px',color:'var(--vd)'}}>▣</span>
-        </div>
+// ── Folder SVG thumbnails ─────────────────────────────────
+// To use a real image: add thumbUrl to the folder data object; FolderThumb renders <img> when present
+const FolderThumb=({kind,accent,thumbUrl})=>{
+  const base={width:'100%',height:'100%',display:'block'};
+  if(thumbUrl)return <img src={thumbUrl} alt={kind} style={{...base,objectFit:'cover'}}/>;
+  if(kind==='trips')return(
+    <svg viewBox="0 0 120 70" style={base} preserveAspectRatio="none">
+      <line x1="0" y1="58" x2="120" y2="58" stroke={accent} strokeWidth=".6" strokeDasharray="2 3" opacity=".4"/>
+      <polyline points="0,58 18,38 32,46 52,22 70,34 88,18 104,32 120,26" stroke={accent} strokeWidth="1" fill="none" style={{filter:`drop-shadow(0 0 2px ${accent})`}}/>
+      <circle cx="78" cy="16" r="5" stroke={accent} strokeWidth=".8" fill="none" opacity=".7"/>
+      <circle cx="78" cy="16" r="2" fill={accent} opacity=".5"/>
+      {[10,30,50,70,90,110].map(x=><line key={x} x1={x} y1="62" x2={x} y2="68" stroke={accent} strokeWidth=".5" opacity=".3"/>)}
+    </svg>
+  );
+  if(kind==='drawings')return(
+    <svg viewBox="0 0 120 70" style={base} preserveAspectRatio="none">
+      {Array.from({length:14},(_,i)=>(
+        <line key={i} x1={-10+i*10} y1="0" x2={20+i*10} y2="70" stroke={accent} strokeWidth=".4" opacity=".22"/>
       ))}
+      <path d="M 18 50 Q 32 18, 48 38 T 78 30 T 104 44" stroke={accent} strokeWidth="1.2" fill="none" style={{filter:`drop-shadow(0 0 2px ${accent})`}}/>
+      <circle cx="22" cy="20" r="2.5" fill={accent}/>
+      <path d="M 90 14 L 96 8 L 100 12 L 94 18 Z" stroke={accent} strokeWidth=".7" fill="none"/>
+    </svg>
+  );
+  if(kind==='devlogs')return(
+    <svg viewBox="0 0 120 70" style={base} preserveAspectRatio="none">
+      {[8,18,28,42,56].map((y,i)=><line key={i} x1="0" x2="120" y1={y} y2={y} stroke={accent} strokeWidth=".5" opacity=".18"/>)}
+      <rect x="36" y="18" width="48" height="34" stroke={accent} strokeWidth=".8" fill="none" opacity=".7"/>
+      <polygon points="54,26 54,44 70,35" fill={accent} style={{filter:`drop-shadow(0 0 3px ${accent})`}}/>
+      <text x="6" y="66" fill={accent} fontFamily="monospace" fontSize="6" opacity=".55">REC ● 00:42:18</text>
+      <circle cx="98" cy="64" r="1.6" fill={accent}/>
+    </svg>
+  );
+  if(kind==='wear')return(
+    <svg viewBox="0 0 120 70" style={base} preserveAspectRatio="none">
+      <path d="M 46 14 L 36 22 L 32 36 L 38 38 L 38 60 L 82 60 L 82 38 L 88 36 L 84 22 L 74 14 L 68 18 Q 60 24, 52 18 Z" stroke={accent} strokeWidth="1" fill="none" style={{filter:`drop-shadow(0 0 2px ${accent})`}}/>
+      <line x1="60" y1="20" x2="60" y2="34" stroke={accent} strokeWidth=".5" opacity=".5"/>
+      <rect x="50" y="40" width="20" height="10" stroke={accent} strokeWidth=".7" fill="none" opacity=".7"/>
+      <text x="60" y="48" textAnchor="middle" fill={accent} fontFamily="monospace" fontSize="5" opacity=".8">MJW</text>
+    </svg>
+  );
+  if(kind==='gameart')return(
+    <svg viewBox="0 0 120 70" style={base} preserveAspectRatio="none">
+      {Array.from({length:7*4},(_,i)=>{
+        const x=(i%7)*16+6,y=Math.floor(i/7)*16+6;
+        const filled=[2,5,8,9,10,12,14,15,16,17,19,22,25].includes(i);
+        return <rect key={i} x={x} y={y} width="12" height="12" stroke={accent} strokeWidth=".4" fill={filled?accent:'none'} opacity={filled?.7:.25}/>;
+      })}
+    </svg>
+  );
+  if(kind==='photo')return(
+    <svg viewBox="0 0 120 70" style={base} preserveAspectRatio="none">
+      <rect x="0" y="6" width="120" height="58" stroke={accent} strokeWidth=".6" fill="none" opacity=".5"/>
+      {[8,28,48,68,88,108].map(x=>(<g key={x}><rect x={x} y="10" width="6" height="5" fill={accent} opacity=".5"/><rect x={x} y="55" width="6" height="5" fill={accent} opacity=".5"/></g>))}
+      <rect x="20" y="22" width="34" height="28" stroke={accent} strokeWidth=".7" fill="none" opacity=".6"/>
+      <rect x="66" y="22" width="34" height="28" stroke={accent} strokeWidth=".7" fill="none" opacity=".6"/>
+      <circle cx="37" cy="36" r="5" stroke={accent} strokeWidth=".6" fill="none"/>
+      <circle cx="83" cy="36" r="5" stroke={accent} strokeWidth=".6" fill="none"/>
+    </svg>
+  );
+  return null;
+};
+
+// ── Creative Archive — full-screen takeover ───────────────
+const CA_LOAD_STEPS=[
+  {p:14, msg:"MOUNTING /VAR/CREATIVE"},
+  {p:30, msg:"INDEXING MEDIA NODES"},
+  {p:48, msg:"DECRYPTING THUMBNAILS"},
+  {p:66, msg:"LOADING METADATA TAGS"},
+  {p:84, msg:"CALIBRATING GALLERY VIEW"},
+  {p:100,msg:"ARCHIVE READY"},
+];
+
+const CreativeArchive=({onClose})=>{
+  const [phase,setPhase]=useState('load');
+  const [prog,setProg]=useState(0);
+  const [msgs,setMsgs]=useState([]);
+  const [folder,setFolder]=useState(null);
+  const [hov,setHov]=useState(null);
+  const [closing,setClosing]=useState(false);
+
+  useEffect(()=>{
+    if(phase!=='load')return;
+    const start=Date.now(),dur=800;
+    let raf;
+    const tick=()=>{
+      const p=Math.min(100,Math.round((Date.now()-start)/dur*100));
+      setProg(p);
+      setMsgs(CA_LOAD_STEPS.filter(s=>s.p<=p));
+      if(p<100)raf=requestAnimationFrame(tick);
+      else{
+        beep(900,.06);setTimeout(()=>beep(1300,.1),80);
+        setTimeout(()=>setPhase('browse'),520);
+      }
+    };
+    raf=requestAnimationFrame(tick);
+    return()=>cancelAnimationFrame(raf);
+  },[phase]);
+
+  const doClose=useCallback(()=>{
+    if(closing)return;
+    setClosing(true);sndBack();
+    setTimeout(onClose,260);
+  },[closing,onClose]);
+
+  useEffect(()=>{
+    const h=e=>{
+      if(e.key!=='Escape')return;
+      if(folder){setFolder(null);sndBack();}
+      else doClose();
+    };
+    window.addEventListener('keydown',h);
+    return()=>window.removeEventListener('keydown',h);
+  },[folder,doClose]);
+
+  const openFolder=f=>{setFolder(f);sndSel();};
+
+  return(
+    <div style={{position:'fixed',inset:0,zIndex:600,background:'var(--bg)',display:'flex',flexDirection:'column',
+      animation:closing?'fadeOut .26s ease forwards':'fadeIn .25s ease',overflow:'hidden'}}>
+      <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(0,255,136,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.025) 1px,transparent 1px)',backgroundSize:'46px 46px',pointerEvents:'none'}}/>
+
+      {/* Header */}
+      <div style={{position:'relative',borderBottom:'1px solid var(--bd)',padding:'12px 26px',display:'flex',alignItems:'center',justifyContent:'space-between',background:'rgba(0,0,0,.5)',flexShrink:0,zIndex:2}}>
+        <div style={{display:'flex',alignItems:'center',gap:'14px'}}>
+          <div style={{position:'relative',width:'44px',height:'44px'}}>
+            <div style={{position:'absolute',inset:0,borderRadius:'50%',border:'1px solid var(--g)',animation:'pulse 2s infinite',boxShadow:'0 0 12px rgba(0,255,136,.25)'}}/>
+            <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center'}}>
+              <span className="glow" style={{fontSize:'22px'}}>◆</span>
+            </div>
+          </div>
+          <div>
+            <div className="px glow" style={{fontSize:'9px',letterSpacing:'2px'}}>
+              <DecryptText text="CREATIVE_ARCHIVE.SYS" speed={14}/>
+            </div>
+            <div style={{fontSize:'16px',color:'var(--dm)',marginTop:'3px',letterSpacing:'1px'}}>
+              {phase==='load'?'INITIALIZING':folder?`/ ${folder.name}`:'/ROOT — SELECT MODULE'}
+            </div>
+          </div>
+        </div>
+        <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+          {folder&&(
+            <button className="ca-back-btn" onClick={()=>{setFolder(null);sndBack();}} onMouseEnter={sndNav}>[ ← BACK ]</button>
+          )}
+          <button className="ca-back-btn" onClick={doClose} onMouseEnter={sndNav}>[ ESC // EXIT ]</button>
+        </div>
+      </div>
+
+      {/* Scrollable body */}
+      <div className="sy" style={{flex:1,overflow:'auto',position:'relative',zIndex:2}}>
+
+        {/* Load phase */}
+        {phase==='load'&&(
+          <div style={{minHeight:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'40px 20px'}}>
+            <div style={{position:'relative',width:'150px',height:'150px',marginBottom:'30px'}}>
+              <svg width="150" height="150" viewBox="0 0 150 150">
+                <circle cx="75" cy="75" r="68" stroke="var(--bd)" strokeWidth="1" fill="none"/>
+                <g style={{transformOrigin:'75px 75px',animation:'spin 9s linear infinite'}}>
+                  <circle cx="75" cy="75" r="62" stroke="rgba(0,255,136,.18)" strokeWidth="1" fill="none" strokeDasharray="4 10"/>
+                </g>
+                <g style={{transformOrigin:'75px 75px',animation:'spinRev 14s linear infinite'}}>
+                  <circle cx="75" cy="75" r="56" stroke="rgba(0,212,212,.14)" strokeWidth="1" fill="none" strokeDasharray="2 18"/>
+                </g>
+                {Array.from({length:8},(_,i)=>{const a=i*45*Math.PI/180;return(
+                  <line key={i} x1={75+Math.cos(a)*40} y1={75+Math.sin(a)*40} x2={75+Math.cos(a)*48} y2={75+Math.sin(a)*48} stroke="var(--g)" strokeWidth="1" opacity=".5"/>
+                )})}
+                <circle cx="75" cy="75" r="32" stroke="var(--g)" strokeWidth="1" fill="rgba(0,255,136,.06)"
+                  style={{filter:'drop-shadow(0 0 12px var(--g))',animation:'pulse 2s infinite'}}/>
+                <text x="75" y="86" textAnchor="middle" fill="var(--g)" fontSize="34"
+                  fontFamily="'VT323',monospace" style={{filter:'drop-shadow(0 0 8px var(--g))'}}>◆</text>
+              </svg>
+            </div>
+            <div className="px glow" style={{fontSize:'10px',letterSpacing:'3px',marginBottom:'6px'}}>ACCESSING ARCHIVE</div>
+            <div style={{fontSize:'17px',color:'var(--vd)',letterSpacing:'2px',marginBottom:'30px'}}>decrypting creative payload</div>
+            <div style={{width:'min(520px,80vw)'}}>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:'8px',fontSize:'17px'}}>
+                <span style={{color:'var(--vd)',letterSpacing:'2px'}}>LOADING</span>
+                <span className="glow" style={{fontFamily:'monospace',minWidth:'50px',textAlign:'right'}}>{String(prog).padStart(3,' ')}%</span>
+              </div>
+              <div style={{height:'6px',background:'#0a1a0e',border:'1px solid var(--bd)',overflow:'hidden',marginBottom:'20px',position:'relative'}}>
+                <div style={{position:'absolute',inset:0,width:`${prog}%`,background:'var(--g)',boxShadow:'0 0 14px var(--g)',transition:'width .08s'}}/>
+                <div style={{position:'absolute',top:0,bottom:0,left:`${prog}%`,width:'3px',background:'#fff',opacity:.7,boxShadow:'0 0 8px #fff',transform:'translateX(-1px)'}}/>
+              </div>
+              <div style={{fontSize:'16px',minHeight:'130px'}}>
+                {msgs.map((m,i)=>(
+                  <div key={m.msg} style={{display:'flex',alignItems:'center',gap:'9px',marginBottom:'6px',
+                    animation:'fadeUp .2s ease both',color:i===msgs.length-1?'var(--g)':'var(--vd)'}}>
+                    <span style={{color:i===msgs.length-1?'var(--t)':'var(--vd)',fontSize:'13px'}}>{i===msgs.length-1?'▶':'✓'}</span>
+                    {i===msgs.length-1?<DecryptText text={m.msg} speed={16}/>:<span>{m.msg}</span>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Browse root — folder grid */}
+        {phase==='browse'&&!folder&&(
+          <div style={{padding:'28px 32px 40px',animation:'fadeIn .35s ease'}}>
+            <div style={{display:'flex',gap:'12px',marginBottom:'22px',flexWrap:'wrap'}}>
+              {[
+                {l:'MODULES', v:D.creativeFolders.length},
+                {l:'ASSETS',  v:D.creativeFolders.reduce((a,f)=>a+f.count,0)},
+                {l:'STATUS',  v:'LIVE', c:'var(--t)'},
+                {l:'LAST_SYNC',v:'JUST NOW'},
+              ].map(s=>(
+                <div key={s.l} style={{border:'1px solid var(--bd)',background:'var(--pb)',padding:'8px 14px',minWidth:'130px'}}>
+                  <div style={{fontSize:'12px',color:'var(--vd)',letterSpacing:'2px',marginBottom:'2px'}}>{s.l}</div>
+                  <div style={{fontSize:'19px',color:s.c||'var(--g)',textShadow:`0 0 6px ${s.c||'var(--g)'}`}}>{s.v}</div>
+                </div>
+              ))}
+            </div>
+            <div className="sec-label"><span className="glow">◆</span> SELECT MODULE</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'14px'}}>
+              {D.creativeFolders.map((f,i)=>{
+                const isHov=hov===f.id;
+                const accent=f.color==='t'?'var(--t)':'var(--g)';
+                const glow=f.color==='t'?'rgba(0,212,212,.5)':'rgba(0,255,136,.5)';
+                const rawAccent=f.color==='t'?'#00d4d4':'#00ff88';
+                return(
+                  <div key={f.id} className="ca-folder"
+                    style={{animation:`staggerUp .35s ${i*60}ms ease both`,
+                      ...(isHov?{borderColor:accent,boxShadow:`0 0 22px ${glow},inset 0 0 18px rgba(255,255,255,.02)`,transform:'translateY(-2px)'}:{})}}
+                    onClick={()=>openFolder(f)}
+                    onMouseEnter={()=>{setHov(f.id);sndNav();}}
+                    onMouseLeave={()=>setHov(null)}>
+                    {/* Thumbnail */}
+                    <div style={{position:'relative',aspectRatio:'16/9',background:'var(--bg)',borderBottom:'1px solid var(--bd)',overflow:'hidden'}}>
+                      <div style={{position:'absolute',inset:0,backgroundImage:'repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0,rgba(0,0,0,.18) 1px,transparent 1px,transparent 3px)',pointerEvents:'none',opacity:.5}}/>
+                      <FolderThumb kind={f.thumb} accent={rawAccent} thumbUrl={f.thumbUrl}/>
+                      <div style={{position:'absolute',top:6,left:6,fontFamily:'monospace',fontSize:'10px',color:accent,letterSpacing:'1px',textShadow:`0 0 4px ${accent}`}}>
+                        ◉ REC // {String(i+1).padStart(2,'0')}
+                      </div>
+                      <div style={{position:'absolute',top:6,right:6,fontFamily:'monospace',fontSize:'10px',color:'var(--vd)'}}>
+                        {String(f.count).padStart(3,'0')} FILES
+                      </div>
+                      <div style={{position:'absolute',bottom:0,left:0,right:0,height:'2px',background:`linear-gradient(90deg,transparent,${accent},transparent)`,opacity:.6}}/>
+                    </div>
+                    {/* Card body */}
+                    <div style={{padding:'12px 14px',display:'flex',flexDirection:'column',gap:'9px',flex:1}}>
+                      <div style={{display:'flex',alignItems:'center',gap:'9px'}}>
+                        <div style={{width:'30px',height:'30px',border:`1px solid ${isHov?accent:'var(--bd)'}`,
+                          background:'var(--bg)',display:'flex',alignItems:'center',justifyContent:'center',
+                          boxShadow:isHov?`0 0 10px ${accent}`:'none',transition:'all .15s',flexShrink:0}}>
+                          <span style={{fontSize:'17px',color:accent,textShadow:`0 0 6px ${accent}`}}>{f.icon}</span>
+                        </div>
+                        <div style={{minWidth:0,flex:1}}>
+                          <div className="px" style={{fontSize:'7px',color:accent,textShadow:`0 0 6px ${accent}`,letterSpacing:'1px',marginBottom:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{f.name}</div>
+                          <div style={{fontSize:'13px',color:'var(--vd)',letterSpacing:'1px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{f.sub}</div>
+                        </div>
+                      </div>
+                      <div style={{display:'flex',flexWrap:'wrap',gap:'3px',marginTop:'auto'}}>
+                        {f.tags.slice(0,3).map(t=>(
+                          <span key={t} style={{fontSize:'12px',color:accent,border:`1px solid ${accent}`,opacity:.65,padding:'0 6px',background:'var(--bg)'}}>{t}</span>
+                        ))}
+                      </div>
+                      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:'13px',color:'var(--vd)',borderTop:'1px solid var(--bd)',paddingTop:'7px'}}>
+                        <span style={{fontFamily:'monospace'}}>/{f.id}</span>
+                        <span style={{color:isHov?accent:'var(--vd)',transition:'color .15s'}}>[ OPEN ] ›</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Browse detail — folder contents */}
+        {phase==='browse'&&folder&&(
+          <div style={{padding:'26px 32px 40px',animation:'fadeIn .25s ease'}} key={folder.id}>
+            <div style={{display:'flex',gap:'14px',alignItems:'center',marginBottom:'18px'}}>
+              <div style={{width:'52px',height:'52px',border:'1px solid var(--g)',background:'var(--g2)',
+                display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 0 14px rgba(0,255,136,.2)'}}>
+                <span className="glow" style={{fontSize:'28px'}}>{folder.icon}</span>
+              </div>
+              <div style={{flex:1,minWidth:0}}>
+                <div className="px glow" style={{fontSize:'10px',letterSpacing:'2px',marginBottom:'4px'}}>
+                  <DecryptText text={folder.name} speed={14}/>
+                </div>
+                <div style={{fontSize:'16px',color:'var(--dm)',letterSpacing:'1px'}}>{folder.sub}</div>
+              </div>
+              <div style={{textAlign:'right',fontSize:'14px',color:'var(--vd)',fontFamily:'monospace'}}>
+                <div style={{fontSize:'19px',color:'var(--t)',textShadow:'0 0 5px var(--t)'}}>{folder.items.length}/{folder.count}</div>
+                <div>VISIBLE</div>
+              </div>
+            </div>
+            <div style={{display:'flex',flexWrap:'wrap',gap:'5px',marginBottom:'18px'}}>
+              {folder.tags.map(t=>(
+                <span key={t} style={{fontSize:'13px',color:'var(--t)',border:'1px solid rgba(0,212,212,.4)',padding:'2px 8px',background:'rgba(0,212,212,.05)'}}>#{t}</span>
+              ))}
+            </div>
+            <div className="sec-label"><span className="glowt">▣</span> CONTENTS</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(5,minmax(0,1fr))',gap:'10px'}}>
+              {folder.items.map((it,i)=>(
+                <div key={i} className="ca-thumb" style={{animation:`ca-thumb-in .3s ${i*40}ms ease both`}}
+                  onMouseEnter={sndNav} onClick={sndSel}>
+                  <div className="ca-thumb-stripes"/>
+                  <div style={{position:'absolute',top:4,left:4,width:9,height:9,borderTop:'1px solid var(--t)',borderLeft:'1px solid var(--t)',opacity:.6}}/>
+                  <div style={{position:'absolute',bottom:4,right:4,width:9,height:9,borderBottom:'1px solid var(--t)',borderRight:'1px solid var(--t)',opacity:.6}}/>
+                  <div style={{position:'relative',textAlign:'center',padding:'10px'}}>
+                    <div style={{fontSize:'24px',color:'var(--vd)',marginBottom:'6px'}}>▣</div>
+                    <div style={{fontSize:'12px',color:'var(--t)',letterSpacing:'1px',marginBottom:'2px'}}>{it.kind}</div>
+                    <div style={{fontSize:'15px',color:'var(--dm)',fontFamily:'monospace',wordBreak:'break-all'}}>{it.label}</div>
+                  </div>
+                  <div style={{position:'absolute',bottom:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--g),transparent)',opacity:.4}}/>
+                </div>
+              ))}
+            </div>
+            <div style={{marginTop:'22px',padding:'12px 16px',border:'1px dashed var(--bd)',background:'rgba(0,0,0,.3)',
+              fontSize:'15px',color:'var(--vd)',textAlign:'center',letterSpacing:'1px'}}>
+              — PLACEHOLDER GRID // DROP IN REAL {folder.name} ASSETS WHEN READY —
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div style={{position:'relative',borderTop:'1px solid var(--bd)',padding:'8px 26px',display:'flex',gap:'18px',
+        fontSize:'14px',color:'var(--dm)',background:'rgba(0,0,0,.5)',flexShrink:0,zIndex:2,alignItems:'center'}}>
+        <span style={{color:'var(--vd)'}}>◆</span>
+        <span>[ <span className="glow">↵</span> {folder?'CLICK ITEM':'OPEN FOLDER'} ]</span>
+        <span>[ <span className="glow">⎋</span> {folder?'BACK':'EXIT'} ]</span>
+        <span style={{marginLeft:'auto',color:'var(--vd)',fontSize:'12px',letterSpacing:'1px'}}>
+          {phase==='load'?'STATE: BOOTING':folder?`STATE: VIEWING ${folder.name}`:'STATE: ROOT'}
+        </span>
+      </div>
     </div>
-    <div style={{marginTop:'12px',fontSize:'15px',color:'var(--vd)',textAlign:'center'}}>— COMING SOON —</div>
-  </div>
-);
+  );
+};
 
 // ══════════════════════════════════════════════════════
 // RADIAL MENU
@@ -660,7 +995,7 @@ const SECS=[
 
 const SCREEN_MAP={
   CHARACTER:<CharacterScreen/>,LEVELS:<LevelsScreen/>,MAP:<MapScreen/>,
-  CREATIVE:<CreativeScreen/>,LORE:<LoreScreen/>,QUESTLOG:<QuestLogScreen/>,
+  LORE:<LoreScreen/>,QUESTLOG:<QuestLogScreen/>,
 };
 
 const SZ=540, CX=270, CY=270, RAD=196;
@@ -849,6 +1184,7 @@ const TweaksPanel=({vis})=>{
 // ══════════════════════════════════════════════════════
 const MainMenu=()=>{
   const [sel,setSel]=useState(null);
+  const [creativeOpen,setCreativeOpen]=useState(false);
   const [tweaksVis,setTweaksVis]=useState(false);
   const [now,setNow]=useState(new Date());
   useEffect(()=>{const t=setInterval(()=>setNow(new Date()),30000);return()=>clearInterval(t)},[]);
@@ -897,7 +1233,7 @@ const MainMenu=()=>{
 
       <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',position:'relative'}}>
         <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(0,255,136,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.02) 1px,transparent 1px)',backgroundSize:'46px 46px',pointerEvents:'none'}}/>
-        <RadialMenu onSelect={id=>{setSel(id);sndSel()}}/>
+        <RadialMenu onSelect={id=>{sndSel();if(id==='CREATIVE')setCreativeOpen(true);else setSel(id);}}/>
       </div>
 
       <div style={{borderTop:'1px solid var(--bd)',padding:'7px 22px',display:'flex',gap:'20px',fontSize:'15px',color:'var(--dm)',flexShrink:0,background:'rgba(0,0,0,.4)',alignItems:'center'}}>
@@ -924,6 +1260,7 @@ const MainMenu=()=>{
       })}
 
       {sel&&<ContentOverlay secId={sel} onClose={()=>setSel(null)}/>}
+      {creativeOpen&&<CreativeArchive onClose={()=>setCreativeOpen(false)}/>}
       <TweaksPanel vis={tweaksVis}/>
     </div>
   );
