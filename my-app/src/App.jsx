@@ -761,6 +761,27 @@ const FolderThumb=({kind,accent,thumbUrl})=>{
   return null;
 };
 
+// ── Lazy image — only loads when scrolled into view inside the archive ───────
+const LazyImg=({src,alt,style,scrollRoot})=>{
+  const [visible,setVisible]=useState(false);
+  const wrapRef=useRef(null);
+  useEffect(()=>{
+    const el=wrapRef.current;
+    if(!el)return;
+    const obs=new IntersectionObserver(
+      ([e])=>{if(e.isIntersecting){setVisible(true);obs.disconnect();}},
+      {root:scrollRoot?.current??null,rootMargin:'300px'}
+    );
+    obs.observe(el);
+    return()=>obs.disconnect();
+  },[scrollRoot]);
+  return(
+    <div ref={wrapRef} style={{position:'absolute',inset:0,background:'var(--pb)'}}>
+      {visible&&<img src={src} alt={alt} decoding="async" style={style}/>}
+    </div>
+  );
+};
+
 // ── Creative Archive — full-screen takeover ───────────────
 const CA_LOAD_STEPS=[
   {p:14, msg:"MOUNTING /VAR/CREATIVE"},
@@ -778,6 +799,7 @@ const CreativeArchive=({onClose})=>{
   const [folder,setFolder]=useState(null);
   const [hov,setHov]=useState(null);
   const [closing,setClosing]=useState(false);
+  const scrollRef=useRef(null);
 
   useEffect(()=>{
     document.body.classList.add('creative-open');
@@ -852,7 +874,7 @@ const CreativeArchive=({onClose})=>{
       </div>
 
       {/* Scrollable body */}
-      <div className="sy" style={{flex:1,overflow:'auto',position:'relative',zIndex:2}}>
+      <div ref={scrollRef} className="sy" style={{flex:1,overflow:'auto',position:'relative',zIndex:2}}>
 
         {/* Load phase */}
         {phase==='load'&&(
@@ -996,29 +1018,23 @@ const CreativeArchive=({onClose})=>{
               ))}
             </div>
             <div className="sec-label"><span className="glowt">▣</span> CONTENTS</div>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(5,minmax(0,1fr))',gap:'10px'}}>
-              {folder.items.map((it,i)=>(
-                <div key={i} className="ca-thumb" style={{animation:`ca-thumb-in .3s ${i*40}ms ease both`}}
-                  onMouseEnter={sndNav} onClick={sndSel}>
-                  <div className="ca-thumb-stripes"/>
-                  <div style={{position:'absolute',top:4,left:4,width:9,height:9,borderTop:'1px solid var(--t)',borderLeft:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
-                  <div style={{position:'absolute',bottom:4,right:4,width:9,height:9,borderBottom:'1px solid var(--t)',borderRight:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
-                  {it.url
-                    ? <img src={it.url} alt={it.label} loading="lazy" decoding="async" style={{width:'100%',height:'100%',objectFit:'cover',display:'block',position:'absolute',inset:0}}/>
-                    : <div style={{position:'relative',textAlign:'center',padding:'10px'}}>
-                        <div style={{fontSize:'24px',color:'var(--vd)',marginBottom:'6px'}}>▣</div>
-                        <div style={{fontSize:'12px',color:'var(--t)',letterSpacing:'1px',marginBottom:'2px'}}>{it.kind}</div>
-                        <div style={{fontSize:'15px',color:'var(--dm)',fontFamily:'monospace',wordBreak:'break-all'}}>{it.label}</div>
-                      </div>
-                  }
-                  <div style={{position:'absolute',bottom:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--g),transparent)',opacity:.4,zIndex:2}}/>
-                </div>
-              ))}
-            </div>
-            {!folder.items.some(it=>it.url) && (
-              <div style={{marginTop:'22px',padding:'12px 16px',border:'1px dashed var(--bd)',background:'rgba(0,0,0,.3)',
+            {folder.items.some(it=>it.url)?(
+              <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'10px'}}>
+                {folder.items.filter(it=>it.url).map((it,i)=>(
+                  <div key={i} className="ca-thumb" style={{animation:`ca-thumb-in .3s ${i*40}ms ease both`}}
+                    onMouseEnter={sndNav} onClick={sndSel}>
+                    <div className="ca-thumb-stripes"/>
+                    <div style={{position:'absolute',top:4,left:4,width:9,height:9,borderTop:'1px solid var(--t)',borderLeft:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
+                    <div style={{position:'absolute',bottom:4,right:4,width:9,height:9,borderBottom:'1px solid var(--t)',borderRight:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
+                    <LazyImg src={it.url} alt={it.label} scrollRoot={scrollRef} style={{width:'100%',height:'100%',objectFit:'cover',display:'block',position:'absolute',inset:0}}/>
+                    <div style={{position:'absolute',bottom:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--g),transparent)',opacity:.4,zIndex:2}}/>
+                  </div>
+                ))}
+              </div>
+            ):(
+              <div style={{marginTop:'22px',padding:'32px 16px',border:'1px dashed var(--bd)',background:'rgba(0,0,0,.3)',
                 fontSize:'15px',color:'var(--vd)',textAlign:'center',letterSpacing:'1px'}}>
-                — PLACEHOLDER GRID // DROP IN REAL {folder.name} ASSETS WHEN READY —
+                — CONTENT COMING SOON // NO ASSETS LOADED YET —
               </div>
             )}
           </div>
