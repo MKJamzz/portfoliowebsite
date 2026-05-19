@@ -6,7 +6,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 const D = {
   name: "MICHAEL W.",
   roles: ["FULL-STACK DEVELOPER","GAME DEVELOPER","EMBEDDED DEVELOPER","COMP. ENG. STUDENT","CONTENT CREATOR"],
-  bio: `I'm a Computer Engineering student at the University of Waterloo with a passion for creating innovative technology solutions. My journey spans from teaching coding to young minds to building complex systems and founding my own streetwear brand.
+  bio: `I'm a Computer Engineering student at the University of Waterloo with a passion for creating innovative technology solutions. My journey spans from teaching coding to young minds by breaking down complex systems, founding my own streetwear brand, and even developing software in a professional environment in multiple different contexts (which I thought I would never do).
 
 What drives me is the intersection of creativity and technology. Whether I'm developing a Unity game with procedural generation, building an RC car with unlimited range, or optimizing data structures for better performance, I'm always looking for ways to push boundaries and solve real-world problems.
 
