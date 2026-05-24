@@ -8,7 +8,7 @@ const D = {
   roles: ["FULL-STACK DEVELOPER","GAME DEVELOPER","EMBEDDED DEVELOPER","COMP. ENG. STUDENT","CONTENT CREATOR"],
   bio: `I'm a Computer Engineering student at the University of Waterloo with a passion for creating innovative technology solutions. My journey spans from teaching coding to young minds by breaking down complex systems, founding my own streetwear brand, and even developing software in a professional environment in multiple different contexts (which I thought I would never do).
 
-What drives me is the intersection of creativity and technology. Whether I'm developing a Unity game with procedural generation, building an RC car with unlimited range, or optimizing data structures for better performance, I'm always looking for ways to push boundaries and solve real-world problems.
+What drives me is the vast world of creativity and technology. Whether I'm developing a game, building a hobby project like the rc car, optimizing data structures for better performance, or even just drawing characters, I'm always looking for new things to learn and to push boundaries and change my perspective of my pre-existing knowledge.
 
 My experience ranges from low-level hardware programming to high-level software architecture, with a special interest in game development, embedded systems, and creating tools that make complex tasks simple and elegant.`,
   level: 4, xp: 9800, xpMax: 10000,
@@ -18,15 +18,15 @@ My experience ranges from low-level hardware programming to high-level software 
   ],
   skillCats: [
     {cat:"LANGUAGES",   items:["C/C++","C#","JavaScript","Python","HTML/CSS","Lua","VHDL","ARM Assembly"]},
-    {cat:"FRAMEWORKS",  items:["Unity","React","Vue.js","Roblox Studio","Linux"]},
+    {cat:"FRAMEWORKS",  items:["Unity","React","Vue.js","Linux", "Roblox Studio","Node.js","Express","Tailwind CSS"]},
     {cat:"EMBEDDED",    items:["Raspberry Pi","RISC-V","Quartus Prime","STMCube32 IDE","COMSOL","Arduino"]},
-    {cat:"TOOLS",       items:["Git/GitHub","VSCode","Visual Studio","Valgrind","Postman API","AutoCAD Fusion","3D Printing","Krita","ClickUP"]},
+    {cat:"TOOLS",       items:["Git/GitHub","VSCode","Visual Studio","Valgrind","Postman API","AutoCAD Fusion","3D Printing","Krita","ClickUP", "Slack"]},
     {cat:"DATABASE",    items:["MySQL","SQLite3","CROW API","Shopify"]},
     {cat:"HARDWARE",    items:["Soldering","Oscilloscope","Multimeter","Function Generator","PC Building","SmartCut","CircuitCam8"]},
   ],
   projects: [
     {id:1,name:"CTRL'D",sub:"UWDGC Fall 2025 Game Jam",
-     desc:"2D puzzle game built around controlling multiple robots through signal-based inputs. Designed, coded, and illustrated all game systems and assets independently — focused on gameplay clarity, responsive mechanics, and cohesive level progression.",
+     desc:"2D puzzle game built around controlling multiple robots through signal-based inputs. Designed, coded, and illustrated all game systems and assets independently. Focused on gameplay clarity, responsive mechanics, and cohesive level progression.",
      highlights:[
        "Created for UWDGC Fall 2025 Game Jam (Theme: Mixed Signals)",
        "Developed player switching & robot control using ScriptableObjects and inheritance",
@@ -153,9 +153,7 @@ My experience ranges from low-level hardware programming to high-level software 
        "Computer Networks","Signal Processing",
      ],
      notes:[
-       "Active member of UWDGC (Design & Gaming Club)",
-       "Part of Waterloo's renowned co-op program",
-       "Expected graduation 2028 with Honours",
+       "Expected graduation 2028",
      ]},
     {year:"2025",type:"AWARD",title:"GAME JAM ENTRY — CTRL'D",org:"UWDGC FALL 2025",
      period:"Oct 2025",location:"University of Waterloo",
@@ -782,6 +780,20 @@ const LazyImg=({src,alt,style,scrollRoot})=>{
   );
 };
 
+// ── Lightbox — fullscreen viewer that loads the full-res image on demand ─────
+const LightboxImage=({item})=>{
+  const thumbSrc=item.url.replace('/Japan2026Pics/','/Japan2026Pics/thumbs/');
+  const [loaded,setLoaded]=useState(false);
+  return(
+    <div style={{position:'relative',maxWidth:'90vw',maxHeight:'90vh',display:'flex',alignItems:'center',justifyContent:'center'}}
+      onClick={e=>e.stopPropagation()}>
+      <img src={thumbSrc} alt={item.label} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain',filter:'blur(12px)',transform:'scale(1.06)',opacity:loaded?0:1,transition:'opacity .4s'}}/>
+      <img src={item.url} alt={item.label} decoding="async" onLoad={()=>setLoaded(true)}
+        style={{maxWidth:'90vw',maxHeight:'90vh',objectFit:'contain',opacity:loaded?1:0,transition:'opacity .4s',position:'relative',zIndex:1}}/>
+    </div>
+  );
+};
+
 // ── Creative Archive — full-screen takeover ───────────────
 const CA_LOAD_STEPS=[
   {p:14, msg:"MOUNTING /VAR/CREATIVE"},
@@ -799,6 +811,7 @@ const CreativeArchive=({onClose})=>{
   const [folder,setFolder]=useState(null);
   const [hov,setHov]=useState(null);
   const [closing,setClosing]=useState(false);
+  const [lightbox,setLightbox]=useState(null); // {items, idx}
   const scrollRef=useRef(null);
 
   useEffect(()=>{
@@ -832,13 +845,19 @@ const CreativeArchive=({onClose})=>{
 
   useEffect(()=>{
     const h=e=>{
+      if(lightbox){
+        if(e.key==='Escape'){setLightbox(null);sndBack();}
+        else if(e.key==='ArrowRight')setLightbox(l=>l.idx<l.items.length-1?{...l,idx:l.idx+1}:l);
+        else if(e.key==='ArrowLeft')setLightbox(l=>l.idx>0?{...l,idx:l.idx-1}:l);
+        return;
+      }
       if(e.key!=='Escape')return;
       if(folder){setFolder(null);sndBack();}
       else doClose();
     };
     window.addEventListener('keydown',h);
     return()=>window.removeEventListener('keydown',h);
-  },[folder,doClose]);
+  },[folder,lightbox,doClose]);
 
   const openFolder=f=>{setFolder(f);sndSel();};
 
@@ -1020,16 +1039,18 @@ const CreativeArchive=({onClose})=>{
             <div className="sec-label"><span className="glowt">▣</span> CONTENTS</div>
             {folder.items.some(it=>it.url)?(
               <div style={{display:'grid',gridTemplateColumns:'repeat(4,minmax(0,1fr))',gap:'10px'}}>
-                {folder.items.filter(it=>it.url).map((it,i)=>(
-                  <div key={i} className="ca-thumb" style={{animation:`ca-thumb-in .3s ${i*40}ms ease both`}}
-                    onMouseEnter={sndNav} onClick={sndSel}>
+                {folder.items.filter(it=>it.url).map((it,i,arr)=>{
+                  const thumbSrc=it.url.replace('/Japan2026Pics/','/Japan2026Pics/thumbs/');
+                  return(
+                  <div key={i} className="ca-thumb" style={{animation:`ca-thumb-in .3s ${i*40}ms ease both`,cursor:'pointer'}}
+                    onMouseEnter={sndNav} onClick={()=>{sndSel();setLightbox({items:arr,idx:i});}}>
                     <div className="ca-thumb-stripes"/>
                     <div style={{position:'absolute',top:4,left:4,width:9,height:9,borderTop:'1px solid var(--t)',borderLeft:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
                     <div style={{position:'absolute',bottom:4,right:4,width:9,height:9,borderBottom:'1px solid var(--t)',borderRight:'1px solid var(--t)',opacity:.6,zIndex:2}}/>
-                    <LazyImg src={it.url} alt={it.label} scrollRoot={scrollRef} style={{width:'100%',height:'100%',objectFit:'cover',display:'block',position:'absolute',inset:0}}/>
+                    <LazyImg src={thumbSrc} alt={it.label} scrollRoot={scrollRef} style={{width:'100%',height:'100%',objectFit:'cover',display:'block',position:'absolute',inset:0}}/>
                     <div style={{position:'absolute',bottom:0,left:0,right:0,height:'2px',background:'linear-gradient(90deg,transparent,var(--g),transparent)',opacity:.4,zIndex:2}}/>
                   </div>
-                ))}
+                );})}
               </div>
             ):(
               <div style={{marginTop:'22px',padding:'32px 16px',border:'1px dashed var(--bd)',background:'rgba(0,0,0,.3)',
@@ -1051,6 +1072,38 @@ const CreativeArchive=({onClose})=>{
           {phase==='load'?'STATE: BOOTING':folder?`STATE: VIEWING ${folder.name}`:'STATE: ROOT'}
         </span>
       </div>
+
+      {/* Lightbox */}
+      {lightbox&&(
+        <div style={{position:'fixed',inset:0,zIndex:800,background:'rgba(0,0,0,.93)',display:'flex',alignItems:'center',
+          justifyContent:'center',animation:'fadeIn .2s ease'}}
+          onClick={()=>setLightbox(null)}>
+          <LightboxImage key={lightbox.items[lightbox.idx].url} item={lightbox.items[lightbox.idx]}/>
+          {lightbox.idx>0&&(
+            <button onClick={e=>{e.stopPropagation();sndNav();setLightbox(l=>({...l,idx:l.idx-1}));}}
+              style={{position:'absolute',left:'20px',top:'50%',transform:'translateY(-50%)',background:'rgba(0,0,0,.6)',
+                border:'1px solid var(--bd)',color:'var(--g)',fontSize:'28px',padding:'8px 18px',cursor:'pointer',fontFamily:'monospace',lineHeight:1}}>
+              ‹
+            </button>
+          )}
+          {lightbox.idx<lightbox.items.length-1&&(
+            <button onClick={e=>{e.stopPropagation();sndNav();setLightbox(l=>({...l,idx:l.idx+1}));}}
+              style={{position:'absolute',right:'20px',top:'50%',transform:'translateY(-50%)',background:'rgba(0,0,0,.6)',
+                border:'1px solid var(--bd)',color:'var(--g)',fontSize:'28px',padding:'8px 18px',cursor:'pointer',fontFamily:'monospace',lineHeight:1}}>
+              ›
+            </button>
+          )}
+          <div style={{position:'absolute',bottom:'20px',left:'50%',transform:'translateX(-50%)',
+            color:'var(--dm)',fontSize:'12px',letterSpacing:'2px',fontFamily:'monospace',pointerEvents:'none'}}>
+            {lightbox.idx+1} / {lightbox.items.length}
+          </div>
+          <button onClick={()=>setLightbox(null)}
+            style={{position:'absolute',top:'16px',right:'22px',background:'none',border:'none',
+              color:'var(--g)',fontSize:'18px',cursor:'pointer',letterSpacing:'2px',fontFamily:'monospace'}}>
+            [×]
+          </button>
+        </div>
+      )}
     </div>
   );
 };
