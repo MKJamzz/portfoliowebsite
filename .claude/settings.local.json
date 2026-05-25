@@ -5,7 +5,8 @@
       "Bash(npm install *)",
       "Bash(npm run *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
-      "Bash(node scripts/generate-thumbs.mjs)"
+      "Bash(node scripts/generate-thumbs.mjs)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\VSCode Files\" -Recurse -Depth 4 -Force | Where-Object { $_.Name -eq \".git\" -and $_.PSIsContainer } | ForEach-Object { git -C $_.Parent.FullName remote -v 2>&1 | Select-Object -First 1 | ForEach-Object { \"$\\($_.Parent.FullName\\): $_\" } })"
     ]
   }
 }
