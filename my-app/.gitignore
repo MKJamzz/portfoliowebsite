@@ -24,3 +24,7 @@ CLAUDE.md
 *.njsproj
 *.sln
 *.sw?
+
+# Remove them from git tracking but keep the files locally
+git rm --cached my-app/public/BealbyPointRivoiliTorontoShow/cachedVideo+1.mp4
+git rm --cached my-app/public/BealbyPointRivoiliTorontoShow/cachedVideo.mp4
