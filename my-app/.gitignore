@@ -28,3 +28,10 @@ CLAUDE.md
 # Remove them from git tracking but keep the files locally
 git rm --cached my-app/public/BealbyPointRivoiliTorontoShow/cachedVideo+1.mp4
 git rm --cached my-app/public/BealbyPointRivoiliTorontoShow/cachedVideo.mp4
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
