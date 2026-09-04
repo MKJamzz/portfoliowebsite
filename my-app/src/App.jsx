@@ -108,7 +108,7 @@ export default function App() {
     setCover(false);
     setMode("quick");
   }, [blip]);
-
+Website redesign handoff
   const enterFull = useCallback(() => {
     blip(560);
     setCover(false);

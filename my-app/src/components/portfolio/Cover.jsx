@@ -1,19 +1,23 @@
 export default function Cover({ role, onEnterQuick, onEnterFull }) {
   return (
-    <div className="fixed inset-0 z-[90] flex flex-col items-center justify-center overflow-hidden bg-paper p-5">
-      <div
-        className="absolute inset-0 animate-drift opacity-20"
-        style={{
-          backgroundImage: "radial-gradient(#c67139 2px, transparent 2.2px)",
-          backgroundSize: "14px 14px",
-        }}
-      />
-      <div className="absolute left-[8%] top-0 h-full w-[70px] -skew-x-[18deg] animate-speed bg-spot opacity-90" />
-      <div className="absolute left-[22%] top-0 h-full w-[22px] -skew-x-[18deg] bg-ink opacity-90" style={{ animation: "speed 0.8s 0.06s cubic-bezier(0.2,0.9,0.2,1) both" }} />
-      <div className="absolute right-[12%] top-0 h-full w-[38px] -skew-x-[18deg] bg-sage opacity-90" style={{ animation: "speed 0.8s 0.12s cubic-bezier(0.2,0.9,0.2,1) both" }} />
+    <>
+      {/* Backdrop — a separate fixed layer so it never scrolls with the content below, and always covers the full viewport. */}
+      <div className="fixed inset-0 z-[90] overflow-hidden bg-paper">
+        <div
+          className="absolute inset-0 animate-drift opacity-20"
+          style={{
+            backgroundImage: "radial-gradient(#c67139 2px, transparent 2.2px)",
+            backgroundSize: "14px 14px",
+          }}
+        />
+        <div className="absolute left-[8%] top-0 h-full w-[70px] -skew-x-[18deg] animate-speed bg-spot opacity-90" />
+        <div className="absolute left-[22%] top-0 h-full w-[22px] -skew-x-[18deg] bg-ink opacity-90" style={{ animation: "speed 0.8s 0.06s cubic-bezier(0.2,0.9,0.2,1) both" }} />
+        <div className="absolute right-[12%] top-0 h-full w-[38px] -skew-x-[18deg] bg-sage opacity-90" style={{ animation: "speed 0.8s 0.12s cubic-bezier(0.2,0.9,0.2,1) both" }} />
+      </div>
 
-      <div className="relative z-10 flex w-full max-w-[1080px] flex-col gap-[clamp(9px,1.8vh,14px)]">
-        <div className="grid items-stretch gap-[clamp(9px,1.8vh,14px)] sm:grid-cols-[1.35fr_1fr]">
+      <div className="fixed inset-0 z-[90] overflow-y-auto">
+        <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1080px] flex-col justify-center gap-[clamp(9px,1.8vh,14px)] px-5 py-8">
+          <div className="grid items-stretch gap-[clamp(9px,1.8vh,14px)] sm:grid-cols-[1.35fr_1fr]">
           <div
             className="flex min-h-0 animate-slam flex-col justify-center overflow-hidden rounded-[12px] border-[4px] border-ink bg-panel px-[30px] py-[clamp(14px,3vh,30px)] shadow-[9px_9px_0_var(--color-ink)]"
             style={{ animationDelay: "0.18s" }}
@@ -24,7 +28,7 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
             </div>
             <h1
               className="mb-2 break-words font-display leading-[0.88] tracking-[-0.035em] text-ink"
-              style={{ fontSize: "clamp(32px,min(6.2vw,11vh),92px)", textShadow: "6px 6px 0 #ffc6a5" }}
+              style={{ fontSize: "clamp(32px,min(6.2vw,11vh),80px)", textShadow: "6px 6px 0 #ffc6a5" }}
             >
               MICHAEL<br />WHITEMAN
             </h1>
@@ -73,6 +77,7 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
           </button>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
