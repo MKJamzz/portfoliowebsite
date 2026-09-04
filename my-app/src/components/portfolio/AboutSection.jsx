@@ -1,88 +1,50 @@
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Code, Cpu, Gamepad2, Zap } from "lucide-react";
+import { BIO_PARAGRAPHS, EDUCATION } from "../../data/portfolioData";
 
 export default function AboutSection() {
-  const highlights = [
-    {
-      icon: Code,
-      title: "Software Development",
-      description: "Proficient in multiple programming languages and frameworks",
-    },
-    {
-      icon: Cpu,
-      title: "Hardware Engineering",
-      description: "Experience with embedded systems and hardware design",
-    },
-    {
-      icon: Gamepad2,
-      title: "Game Development",
-      description: "Creating engaging games with Unity",
-    },
-    {
-      icon: Zap,
-      title: "Innovation Focus",
-      description: "Always exploring cutting-edge technologies and solutions",
-    },
-  ];
-
   return (
-    <section id="about" className="py-24 relative bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#d1b2eb] mb-6 font-tech text-outline">
-            About Me
-          </h2>
-          <div className="w-20 h-1 bg-[var(--primary)] mx-auto mb-8"></div>
+    <section id="origin" className="mb-14 scroll-mt-24">
+      <div className="mb-4.5 flex items-baseline gap-3.5">
+        <h2 className="m-0 font-display leading-[0.9]" style={{ fontSize: "clamp(30px,5.5vw,56px)" }}>ORIGIN</h2>
+        <span className="h-1 flex-1 rounded-sm bg-ink" />
+        <span className="text-[11px] font-black tracking-[0.2em] text-spot-deep">CH. 01</span>
+      </div>
+
+      <div className="grid items-start gap-4 [grid-template-columns:repeat(auto-fit,minmax(290px,1fr))]">
+        <div className="relative min-h-[340px] animate-slam overflow-hidden rounded-[12px] border-[4px] border-ink bg-panel-2 shadow-[8px_8px_0_var(--color-ink)]">
+          <div
+            className="absolute inset-0 opacity-[0.15]"
+            style={{ backgroundImage: "radial-gradient(#201e1d 1.5px, transparent 1.6px)", backgroundSize: "8px 8px" }}
+          />
+          <img
+            src="/images/profile.png"
+            alt="Michael Whiteman"
+            className="relative h-full min-h-[340px] w-full object-cover"
+            style={{ filter: "saturate(0.65) contrast(0.92) brightness(1.08)" }}
+          />
+          <div className="absolute bottom-4 left-4 rounded-full border-[3px] border-ink bg-paper px-4 py-1.5 font-display text-[13px] shadow-[4px_4px_0_var(--color-ink)]">
+            Michael, 2026
+          </div>
         </div>
 
-        <div className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
-          {/* Left column: about text */}
-          <div className="space-y-6">
-            <p className="text-base sm:text-lg text-[#d1b2eb] font-semibold leading-relaxed">
-              I'm a Computer Engineering student at the University of Waterloo
-              with a passion for creating innovative technology solutions. My
-              journey spans from teaching coding to young minds to building
-              complex systems and founding my own streetwear brand.
-            </p>
-
-            <p className="text-base sm:text-lg text-[#d1b2eb] font-semibold leading-relaxed">
-              What drives me is the intersection of creativity and technology.
-              Whether I'm developing a Unity game with procedural generation,
-              building an RC car with unlimited range, or optimizing data
-              structures for better performance, I'm always looking for ways to
-              push boundaries and solve real-world problems.
-            </p>
-
-            <p className="text-base sm:text-lg text-[#d1b2eb] font-semibold leading-relaxed">
-              My experience ranges from low-level hardware programming to
-              high-level software architecture, with a special interest in game
-              development, embedded systems, and creating tools that make
-              complex tasks simple and elegant.
-            </p>
-          </div>
-
-          {/* Right column: highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {highlights.map((highlight, index) => (
-              <Card
-                key={index}
-                className="bg-black/40 rounded-xl backdrop-blur-sm"
-              >
-                <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-xl flex items-center justify-center">
-                    <highlight.icon className="w-8 h-8 text-[var(--primary)]" />
-                  </div>
-                  <h3 className="font-semibold text-[#d1b2eb] mb-2">
-                    {highlight.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-[#d1b2eb] leading-relaxed whitespace-normal">
-                    {highlight.description}
-                  </p>
-                </CardContent>
-              </Card>
+        <div className="grid gap-4">
+          <div className="animate-slam rounded-[12px] border-[4px] border-ink bg-panel p-6 shadow-[8px_8px_0_var(--color-ink)]">
+            {BIO_PARAGRAPHS.map((p, i) => (
+              <p key={i} className={`text-[15.5px] font-semibold leading-[1.65] ${i === BIO_PARAGRAPHS.length - 1 ? "mb-0" : "mb-3"}`}>
+                {p}
+              </p>
             ))}
+          </div>
+          <div className="animate-slam rounded-[12px] border-[4px] border-ink bg-ink px-6 py-5.5 text-paper shadow-[8px_8px_0_var(--color-sage)]">
+            <div className="mb-2 text-[11px] font-black tracking-[0.2em] text-accent-on-dark">EDUCATION</div>
+            <div className="mb-1 font-display text-[22px] leading-[1.05]">{EDUCATION.title}</div>
+            <div className="text-[13.5px] font-bold opacity-80">{EDUCATION.org} · {EDUCATION.period}</div>
+            <div className="mt-3.5 flex flex-wrap gap-1.5">
+              {EDUCATION.courses.map((course) => (
+                <span key={course} className="rounded-full border-2 border-[rgba(245,234,216,0.5)] px-[11px] py-1 text-[11.5px] font-extrabold">
+                  {course}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

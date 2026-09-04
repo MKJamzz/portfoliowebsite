@@ -1,106 +1,60 @@
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Mail, Linkedin, Github, MapPin } from "lucide-react";
-import DecryptedText from "./DecryptedText";
+import { SOCIALS } from "../../data/portfolioData";
 
 export default function ContactSection() {
-  const contactMethods = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "mjwhitem@uwaterloo.ca",
-      link: "mailto:mjwhitem@uwaterloo.ca",
-    },
-    {
-      icon: Linkedin,
-      title: "LinkedIn",
-      value: "michael-j-whiteman",
-      link: "https://linkedin.com/in/michael-j-whiteman/",
-    },
-    {
-      icon: Github,
-      title: "GitHub", 
-      value: "MKJamzz",
-      link: "https://github.com/MKJamzz",
-    },
-    {
-      icon: MapPin,
-      title: "Location",
-      value: "Waterloo, Ontario",
-      link: null,
-    }
-  ];
-
   return (
-    <section id="about" className="py-24 relative bg-transparent">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-dark)] mb-6 text-outline">Get In Touch</h2>
-          <div className="w-20 h-1 bg-[var(--primary)] mx-auto mb-8 "></div>
-          <DecryptedText
-            text="I'm always interested in new opportunities, collaborations, and connecting with fellow engineers and developers. Let's build something amazing together!"
-            className="text-xl text-[#d1b2eb] max-w-3xl mx-auto text-outline"
-            speed={20}
-            maxIterations={10}
-            animateOn="view"
-          />
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {contactMethods.map((method, index) => (
-            <a href={method.link} target="_blank" rel="noopener noreferrer" className="block">
-              <Card key={index} className="h-full bg-black/40 p-6 rounded-xl backdrop-blur-sm transition-all duration-300 hover:border-[var(--primary)]" >
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                    <method.icon className="w-6 h-6 text-[var(--primary)]" />
-                  </div>
-                  <h3 className="font-semibold text-[var(--text-dark)] mb-2">{method.title}</h3>
-                  <p className="text-[#d1b2eb] hover:text-[var(--primary)] transition-colors text-sm break-all">
-                      {method.value}
-                  </p>
-                </CardContent>
-              </Card>
-            </a>
-          ))}
-        </div>
-
-        <div className="max-w-2xl mx-auto text-center">
-          <Card className="space-y-6 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-[var(--text-dark)] mb-4">Ready to Connect?</h3>
-              <DecryptedText
-                text="Whether you're looking to hire, collaborate on a project, or just want to chat about technology, I'd love to hear from you. Send me an email or connect with me on LinkedIn!"
-                className="text-[#d1b2eb] mb-6 leading-relaxed"
-                speed={15}
-                maxIterations={8}
-                animateOn="view"
-              />
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild
-                  className="bg-[var(--primary)] text-white hover:opacity-90 font-medium"
-                  size="lg"
-                >
-                  <a href="mailto:mjwhitem@uwaterloo.ca">
-                    <Mail className="w-5 h-5 mr-2" />
-                    Send Email
-                  </a>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <a href="https://linkedin.com/in/michael-j-whiteman/" target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="w-5 h-5 mr-2" />
-                    Connect on LinkedIn
-                  </a>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="text-center mt-16 pt-8 border-t border-slate-200">
-          <p className="text-[#d1b2eb] text-outline">
-            © 2025 Michael Whiteman. Built with passion and attention to detail.
+    <section id="contact" className="scroll-mt-24">
+      <div className="relative animate-slam overflow-hidden rounded-[12px] border-[4px] border-ink bg-ink px-[34px] py-9.5 text-paper shadow-[10px_10px_0_var(--color-spot)]">
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{ backgroundImage: "radial-gradient(#f5ead8 1.4px, transparent 1.5px)", backgroundSize: "12px 12px" }}
+        />
+        <div className="relative">
+          <h2 className="mb-2.5 font-display leading-[0.92] text-paper" style={{ fontSize: "clamp(30px,6vw,58px)" }}>
+            TO BE CONTINUED
+          </h2>
+          <p className="mb-5.5 max-w-[52ch] text-[15px] font-semibold opacity-80">
+            Hiring, collaborating, or just want to talk about game dev? I answer email fast.
           </p>
+          <div className="flex flex-wrap gap-2.5">
+            <a
+              href={`mailto:${SOCIALS.email}`}
+              className="rounded-full border-[3px] border-paper bg-spot px-[22px] py-2.5 font-display text-[14px] text-text-on-accent no-underline hover:bg-spot-deep"
+            >
+              {SOCIALS.email}
+            </a>
+            <a
+              href={SOCIALS.linkedin}
+              target="_blank"
+              rel="noopener"
+              className="rounded-full border-[3px] border-paper bg-transparent px-[22px] py-2.5 font-display text-[14px] text-paper no-underline hover:bg-paper hover:text-ink"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={SOCIALS.github}
+              target="_blank"
+              rel="noopener"
+              className="rounded-full border-[3px] border-paper bg-transparent px-[22px] py-2.5 font-display text-[14px] text-paper no-underline hover:bg-paper hover:text-ink"
+            >
+              GitHub
+            </a>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2.5">
+            <a
+              href={SOCIALS.resumeSoftware}
+              download
+              className="rounded-full border-[3px] border-accent-on-dark px-4.5 py-2 text-[12.5px] font-black tracking-[0.06em] text-accent-on-dark no-underline hover:bg-accent-on-dark hover:text-ink"
+            >
+              SOFTWARE RÉSUMÉ →
+            </a>
+            <a
+              href={SOCIALS.resumeEmbedded}
+              download
+              className="rounded-full border-[3px] border-sage-on-dark px-4.5 py-2 text-[12.5px] font-black tracking-[0.06em] text-sage-on-dark no-underline hover:bg-sage-on-dark hover:text-ink"
+            >
+              EMBEDDED RÉSUMÉ →
+            </a>
+          </div>
         </div>
       </div>
     </section>
