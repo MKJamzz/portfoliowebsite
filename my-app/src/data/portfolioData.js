@@ -92,7 +92,7 @@ export const PROJECTS = [
   },
   {
     id: 4, title: "OOP Time Series Framework", period: "May – Jun 2024", status: "Shipped",
-    image: "/images/character.png", span: false,
+    image: "/images/timeSeriesOOP.png", span: false,
     shortDescription: "High-performance C++ framework for parsing and analyzing large-scale time series data.",
     description: "Built a high-performance C++ framework for parsing and analyzing large-scale time series data with advanced optimization techniques and object-oriented architecture.",
     highlights: [
@@ -205,8 +205,8 @@ export const SOCIALS = {
   email: "mjwhitem@uwaterloo.ca",
   linkedin: "https://www.linkedin.com/in/michael-j-whiteman/",
   github: "https://github.com/MKJamzz",
-  resumeSoftware: "/Michael_Whiteman___June_29th__Software_Resume.pdf",
-  resumeEmbedded: "/Michael_Whiteman___June_29th__Embedded_Resume.pdf",
+  resumeSoftware: "/MichaelWhiteman_Software_Resume.pdf",
+  resumeEmbedded: "/MichaelWhiteman_EmbeddedResume.pdf",
 };
 
 export const LOGOS = [

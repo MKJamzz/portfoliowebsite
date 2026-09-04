@@ -16,7 +16,7 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
       </div>
 
       <div className="fixed inset-0 z-[90] overflow-y-auto">
-        <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1080px] flex-col justify-center gap-[clamp(9px,1.8vh,14px)] px-5 py-8">
+        <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1080px] flex-col justify-center gap-[clamp(9px,1.8vh,14px)] px-5 py-7">
           <div className="grid items-stretch gap-[clamp(9px,1.8vh,14px)] sm:grid-cols-[1.35fr_1fr]">
           <div
             className="flex min-h-0 animate-slam flex-col justify-center overflow-hidden rounded-[12px] border-[4px] border-ink bg-panel px-[30px] py-[clamp(14px,3vh,30px)] shadow-[9px_9px_0_var(--color-ink)]"
@@ -42,6 +42,25 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
                 {role}
               </span>
             </div>
+
+            <div className="mt-4 grid animate-slam grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3" style={{ animationDelay: "0.44s" }}>
+              <button
+                type="button"
+                onClick={onEnterQuick}
+                className="rounded-[12px] border-[4px] border-ink bg-ink px-5 py-[clamp(10px,2vh,18px)] text-left text-paper shadow-[8px_8px_0_var(--color-spot)] transition hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[11px_11px_0_var(--color-spot)] active:translate-x-1 active:translate-y-1 active:shadow-[3px_3px_0_var(--color-spot)]"
+              >
+                <div className="mb-1 font-display leading-none" style={{ fontSize: "clamp(16px,2.2vh,22px)" }}>THE 30-SECOND READ</div>
+                <div className="text-[12px] font-semibold opacity-75">One page. Skills, top projects, résumé. For recruiters in a hurry.</div>
+              </button>
+              <button
+                type="button"
+                onClick={onEnterFull}
+                className="rounded-[12px] border-[4px] border-ink bg-panel px-5 py-[clamp(10px,2vh,18px)] text-left text-ink shadow-[8px_8px_0_var(--color-sage)] transition hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[11px_11px_0_var(--color-sage)] active:translate-x-1 active:translate-y-1 active:shadow-[3px_3px_0_var(--color-sage)]"
+              >
+                <div className="mb-1 font-display leading-none" style={{ fontSize: "clamp(16px,2.2vh,22px)" }}>READ THE WHOLE THING</div>
+                <div className="text-[12px] font-semibold opacity-70">Every panel — projects, work, school, and the photo pages.</div>
+              </button>
+            </div>
           </div>
 
           <div className="relative min-h-[min(260px,26vh)] animate-slam overflow-hidden rounded-[12px] border-[4px] border-ink bg-panel-2 shadow-[9px_9px_0_var(--color-ink)]" style={{ animationDelay: "0.3s" }}>
@@ -56,25 +75,6 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
               style={{ filter: "saturate(0.85) contrast(1.05)" }}
             />
           </div>
-        </div>
-
-        <div className="grid animate-slam grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-3.5" style={{ animationDelay: "0.44s" }}>
-          <button
-            type="button"
-            onClick={onEnterQuick}
-            className="rounded-[12px] border-[4px] border-ink bg-ink px-6 py-[clamp(12px,2.4vh,22px)] text-left text-paper shadow-[8px_8px_0_var(--color-spot)] transition hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[11px_11px_0_var(--color-spot)] active:translate-x-1 active:translate-y-1 active:shadow-[3px_3px_0_var(--color-spot)]"
-          >
-            <div className="mb-1.5 font-display leading-none" style={{ fontSize: "clamp(19px,2.6vh,26px)" }}>THE 30-SECOND READ</div>
-            <div className="text-[13px] font-semibold opacity-75">One page. Skills, top projects, résumé. For recruiters in a hurry.</div>
-          </button>
-          <button
-            type="button"
-            onClick={onEnterFull}
-            className="rounded-[12px] border-[4px] border-ink bg-panel px-6 py-[clamp(12px,2.4vh,22px)] text-left text-ink shadow-[8px_8px_0_var(--color-sage)] transition hover:-translate-x-[3px] hover:-translate-y-[3px] hover:shadow-[11px_11px_0_var(--color-sage)] active:translate-x-1 active:translate-y-1 active:shadow-[3px_3px_0_var(--color-sage)]"
-          >
-            <div className="mb-1.5 font-display leading-none" style={{ fontSize: "clamp(19px,2.6vh,26px)" }}>READ THE WHOLE THING</div>
-            <div className="text-[13px] font-semibold opacity-70">Every panel — projects, work, school, and the photo pages.</div>
-          </button>
         </div>
       </div>
       </div>
