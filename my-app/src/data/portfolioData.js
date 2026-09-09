@@ -135,6 +135,20 @@ export const PROJECTS = [
       { label: "LIVE SITE", href: "https://michaelw.cool" },
     ],
   },
+  {
+    id: 7, title: "Unraid Home Server", period: "Apr 2026 – Present", status: "Live",
+    image: "/images/unraid.jpeg", span: false,
+    shortDescription: "Self-hosted home server running Unraid with Docker, Cloudflare Tunnels, and services like Jellyfin and Immich.",
+    description: "Built and maintain a home server on Unraid, configuring Docker containers and securely exposing services to the internet via Cloudflare Tunnels — no port forwarding required. Hosts personal media streaming, photo backup, and note-syncing services.",
+    highlights: [
+      "Installed and configured Unraid as the server OS, managing storage arrays and Docker containers",
+      "Set up Cloudflare Tunnels for secure remote access without exposing open ports",
+      "Deployed Jellyfin for streaming a personal library of owned shows and movies",
+      "Self-hosted Immich for private photo/video backup and Obsidian LiveSync for cross-device note syncing",
+    ],
+    technologies: ["Unraid", "Docker", "Cloudflare Tunnels", "Jellyfin", "Immich", "Obsidian LiveSync", "Linux"],
+    links: [],
+  },
 ];
 
 export const JOBS = [
