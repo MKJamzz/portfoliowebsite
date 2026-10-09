@@ -1,4 +1,16 @@
+import { useEffect } from "react";
+
 export default function Cover({ role, onEnterQuick, onEnterFull }) {
+  // Lock page scroll while the cover is up — the full site is rendered underneath it.
+  useEffect(() => {
+    const html = document.documentElement;
+    const prev = html.style.overflow;
+    html.style.overflow = "hidden";
+    return () => {
+      html.style.overflow = prev;
+    };
+  }, []);
+
   return (
     <>
       {/* Backdrop — a separate fixed layer so it never scrolls with the content below, and always covers the full viewport. */}
@@ -15,9 +27,9 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
         <div className="absolute right-[12%] top-0 h-full w-[38px] -skew-x-[18deg] bg-sage opacity-90" style={{ animation: "speed 0.8s 0.12s cubic-bezier(0.2,0.9,0.2,1) both" }} />
       </div>
 
-      <div className="fixed inset-0 z-[90] overflow-y-auto">
-        <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1080px] flex-col justify-center gap-[clamp(9px,1.8vh,14px)] px-5 py-7">
-          <div className="grid items-stretch gap-[clamp(9px,1.8vh,14px)] sm:grid-cols-[1.35fr_1fr]">
+      <div className="fixed inset-0 z-[90] overflow-hidden">
+        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1080px] flex-col justify-center gap-[clamp(9px,1.8vh,14px)] px-5 py-7">
+          <div className="grid items-center gap-[clamp(9px,1.8vh,14px)] sm:grid-cols-[1fr_auto]">
           <div
             className="flex min-h-0 animate-slam flex-col justify-center overflow-hidden rounded-[12px] border-[4px] border-ink bg-panel px-[30px] py-[clamp(14px,3vh,30px)] shadow-[9px_9px_0_var(--color-ink)]"
             style={{ animationDelay: "0.18s" }}
@@ -63,7 +75,7 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
             </div>
           </div>
 
-          <div className="relative min-h-[min(260px,26vh)] animate-slam overflow-hidden rounded-[12px] border-[4px] border-ink bg-panel-2 shadow-[9px_9px_0_var(--color-ink)]" style={{ animationDelay: "0.3s" }}>
+          <div className="relative aspect-[449/808] h-[min(240px,26dvh)] animate-slam justify-self-center sm:h-[min(540px,72dvh)] overflow-hidden rounded-[12px] border-[4px] border-ink bg-panel-2 shadow-[9px_9px_0_var(--color-ink)]" style={{ animationDelay: "0.3s" }}>
             <div
               className="absolute inset-0 opacity-[0.16]"
               style={{ backgroundImage: "radial-gradient(#201e1d 1.6px, transparent 1.7px)", backgroundSize: "7px 7px" }}
@@ -71,7 +83,7 @@ export default function Cover({ role, onEnterQuick, onEnterFull }) {
             <img
               src="/images/character.png"
               alt=""
-              className="relative h-full w-full object-contain object-bottom"
+              className="absolute inset-0 h-full w-full object-cover"
               style={{ filter: "saturate(0.85) contrast(1.05)" }}
             />
           </div>

@@ -3,7 +3,7 @@ import TechMarquee from "./TechMarquee";
 
 export default function QuickMode({ onOpenProject }) {
   const quickJobs = JOBS.slice(0, 3);
-  const quickProjects = PROJECTS.slice(0, 3);
+  const quickProjects = [8, 2, 7].map((id) => PROJECTS.find((p) => p.id === id)); // Narcoleptic Knight, RC Car, Unraid
 
   return (
     <div>
@@ -82,7 +82,7 @@ export default function QuickMode({ onOpenProject }) {
                 alt=""
                 loading="lazy"
                 className="h-full w-full object-cover"
-                style={{ filter: "saturate(0.8) contrast(0.95)" }}
+                style={{ filter: "saturate(0.8) contrast(0.95)", objectPosition: item.imagePosition, imageRendering: item.pixelArt ? "pixelated" : undefined }}
               />
             </div>
             <div className="px-4.5 pb-4.5 pt-4">

@@ -23,7 +23,7 @@ export default function ProjectsSection({ onOpenProject }) {
                 alt=""
                 loading="lazy"
                 className="h-full w-full object-cover"
-                style={{ filter: "saturate(0.82) contrast(0.96)" }}
+                style={{ filter: "saturate(0.82) contrast(0.96)", objectPosition: item.imagePosition, imageRendering: item.pixelArt ? "pixelated" : undefined }}
               />
               <span
                 className={`absolute right-3 top-3 rounded-full border-[3px] border-ink px-3.5 py-1.5 font-display text-[11px] text-ink shadow-[3px_3px_0_var(--color-ink)] ${item.status === "In Progress" ? "bg-hover-sage" : "bg-hover-peach"}`}

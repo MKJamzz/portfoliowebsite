@@ -46,8 +46,23 @@ export const SKILLS = [
 
 export const PROJECTS = [
   {
+    id: 8, title: "Narcoleptic Knight", period: "Oct 2026 · 72-Hour Jam", status: "Shipped",
+    image: "/NarcolepticKnight/NarcoBanner.png", imagePosition: "center 6%", pixelArt: true, span: true,
+    gallery: ["/NarcolepticKnight/NarcoBanner.png", "/NarcolepticKnight/game1.png", "/NarcolepticKnight/game2.png"],
+    shortDescription: "A pixel-art roguelike about a knight fighting deeper into a forest while fighting off sleep. Made in 72 hours for the UW Fall 2026 Game Jam.",
+    description: "An arcade roguelike built by a team of four (with Kevin, Vlad, and Artisha) in 72 hours for the University of Waterloo Fall 2026 Game Jam. You play a knight fighting deeper into a forest who also has to fight the urge to fall asleep, drifting into dreams along the way. Get through 6 levels and escape with the highest score you can.",
+    highlights: [
+      "Created for the UW Fall 2026 Game Jam (Theme: DRIFT)",
+      "Binding of Isaac-style dungeon generation: arrays define room layouts, and rooms are picked from per-level pools",
+      "A range of enemy types to fight across 6 levels of increasing depth",
+      "Roguelike shop where players spend their earnings on items that improve their odds of survival",
+    ],
+    technologies: ["Godot","GDScript","Procedural Gen","Pixel Art","Itch.io"],
+    links: [{ label: "PLAY ON ITCH.IO", href: "https://mkjamzz.itch.io/narcoleptic-knight" }],
+  },
+  {
     id: 1, title: "CTRL'D", period: "Oct 2025 · 72-Hour Jam", status: "Shipped",
-    image: "/images/ctrlbanner.png", span: true,
+    image: "/images/ctrlbanner.png", span: false,
     shortDescription: "A 2D puzzle game built in 72 hours for the UWDGC Fall 2025 Game Jam.",
     description: "2D puzzle game built around controlling multiple robots through signal-based inputs. Designed, coded, and illustrated all game systems and assets independently. Focused on gameplay clarity, responsive mechanics, and cohesive level progression.",
     highlights: [

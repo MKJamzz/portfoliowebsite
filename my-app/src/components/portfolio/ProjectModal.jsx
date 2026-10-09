@@ -1,5 +1,15 @@
+import { useEffect, useState } from "react";
+
 export default function ProjectModal({ project, onClose }) {
+  const [shot, setShot] = useState(null);
+
+  // Reset the selected screenshot whenever a different project is opened.
+  useEffect(() => setShot(null), [project?.id]);
+
   if (!project) return null;
+
+  const pixel = project.pixelArt ? "pixelated" : undefined;
+  const hero = shot ?? project.image;
 
   return (
     <div
@@ -13,10 +23,10 @@ export default function ProjectModal({ project, onClose }) {
       >
         <div className="relative h-[230px] border-b-[4px] border-ink bg-panel-2">
           <img
-            src={project.image}
+            src={hero}
             alt=""
-            className="h-full w-full object-cover"
-            style={{ filter: "saturate(0.85)" }}
+            className={`h-full w-full ${shot ? "object-contain" : "object-cover"}`}
+            style={{ filter: "saturate(0.85)", objectPosition: shot ? undefined : project.imagePosition, imageRendering: pixel }}
           />
           <button
             type="button"
@@ -32,6 +42,20 @@ export default function ProjectModal({ project, onClose }) {
             {project.period} · {project.status}
           </div>
           <p className="mb-4.5 text-[15px] font-semibold leading-[1.6]">{project.description}</p>
+          {project.gallery?.length > 0 && (
+            <div className="mb-4.5 flex gap-2.5 overflow-x-auto pb-1">
+              {project.gallery.map((src) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => setShot(src)}
+                  className={`h-[84px] w-[120px] shrink-0 overflow-hidden rounded-[8px] border-[3px] border-ink bg-panel-2 transition hover:-translate-y-0.5 ${hero === src ? "shadow-[3px_3px_0_var(--color-spot)]" : "opacity-75 hover:opacity-100"}`}
+                >
+                  <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" style={{ imageRendering: pixel }} />
+                </button>
+              ))}
+            </div>
+          )}
           <div className="mb-4.5 grid gap-2">
             {project.highlights.map((h) => (
               <div key={h} className="grid grid-cols-[16px_minmax(0,1fr)] items-start gap-2.5">
