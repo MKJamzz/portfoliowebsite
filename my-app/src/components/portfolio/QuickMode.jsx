@@ -3,7 +3,7 @@ import TechMarquee from "./TechMarquee";
 
 export default function QuickMode({ onOpenProject }) {
   const quickJobs = JOBS.slice(0, 3);
-  const quickProjects = [8, 2, 7].map((id) => PROJECTS.find((p) => p.id === id)); // Narcoleptic Knight, RC Car, Unraid
+  const quickProjects = [8, 2, 9].map((id) => PROJECTS.find((p) => p.id === id)); // Narcoleptic Knight, RC Car, RTOS Kernel
 
   return (
     <div>

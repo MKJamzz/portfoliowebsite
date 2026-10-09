@@ -61,6 +61,20 @@ export const PROJECTS = [
     links: [{ label: "PLAY ON ITCH.IO", href: "https://mkjamzz.itch.io/narcoleptic-knight" }],
   },
   {
+    id: 9, title: "Preemptive RTOS Kernel", period: "Apr – Aug 2026", status: "Shipped",
+    image: "/images/stm32.jpg", span: false,
+    shortDescription: "A University of Waterloo lab project: a preemptive real-time kernel with EDF scheduling and a custom memory allocator, built in C and ARM assembly on top of the course's template code for an STM32.",
+    description: "A group lab project for the Real-Time Operating Systems course at the University of Waterloo. Starting from the course's provided template code (a bare-bones STM32CubeIDE project with startup code and printf), we built a real-time executive (RTX) for the ARM Cortex-M4 on an STM32 Nucleo-64 board in three stages: cooperative multitasking, dynamic memory management, and preemptive Earliest Deadline First scheduling. Every kernel call goes through an SVC exception, keeping a clean split between user tasks and the kernel, and no standard library functions are used apart from printf.",
+    highlights: [
+      "Wrote the context switch as a PendSV handler in ARM assembly, manually saving and restoring R4–R11 and the PSP so each task resumes exactly where it left off",
+      "Routed every kernel API (task create, yield, exit, sleep, alloc) through SVC calls so timer interrupts can't preempt and corrupt kernel state",
+      "Implemented a First-Fit heap allocator with no malloc, 4-byte alignment, per-task memory ownership, and immediate coalescing of adjacent free blocks",
+      "Built a preemptive EDF scheduler driven by the 1 ms SysTick timer, with sleep, periodic yield, deadline changes, and dynamically allocated task stacks",
+    ],
+    technologies: ["C","ARM Assembly","ARM Cortex-M4","STM32","STM32CubeIDE","RTOS","GitLab"],
+    links: [],
+  },
+  {
     id: 1, title: "CTRL'D", period: "Oct 2025 · 72-Hour Jam", status: "Shipped",
     image: "/images/ctrlbanner.png", span: false,
     shortDescription: "A 2D puzzle game built in 72 hours for the UWDGC Fall 2025 Game Jam.",
@@ -92,10 +106,10 @@ export const PROJECTS = [
     ],
   },
   {
-    id: 3, title: "STEAMED", period: "Aug 2025 – Present", status: "In Progress",
+    id: 3, title: "STEAMED", period: "Aug 2025 – Jan 2026", status: "Stopped",
     image: "/images/gameSS.png", span: false,
     shortDescription: "A Unity roguelike with procedural generation — a unique run every time.",
-    description: "Developing a complete roguelike game with procedural generation, ensuring unique gameplay experiences every run. Full progression system with hand-crafted enemy AI and shop mechanics.",
+    description: "Developed a complete roguelike game with procedural generation, ensuring unique gameplay experiences every run. Full progression system with hand-crafted enemy AI and shop mechanics.",
     highlights: [
       "Implemented procedural dungeon generation algorithm for infinite replayability",
       "Designed responsive 2D player controls and combat mechanics",
